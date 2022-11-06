@@ -6,9 +6,15 @@ using UnityEngine;
 public class Killable : MonoBehaviour
 {
     [SerializeField] private int startingHP;
+    [SerializeField] private int maxHP;
+
     private int currentHP;
-    private int maxHP;
     private bool isDead;
+
+    public void OnEnable()
+    {
+        isDead = false;
+    }
 
     public virtual void Damage(int damage)
     {
@@ -22,7 +28,8 @@ public class Killable : MonoBehaviour
 
     public virtual void Die()
     {
-        Destroy(gameObject);
+        isDead = true;
+        //Destroy(gameObject);
     }
 
     
