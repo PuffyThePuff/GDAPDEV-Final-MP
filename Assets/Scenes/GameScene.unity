@@ -596,6 +596,7 @@ GameObject:
   - component: {fileID: 632210736}
   - component: {fileID: 632210735}
   - component: {fileID: 632210737}
+  - component: {fileID: 632210738}
   m_Layer: 5
   m_Name: Crosshair
   m_TagString: Untagged
@@ -676,8 +677,32 @@ MonoBehaviour:
   sensitivity: 2000
   border: {x: 50, y: 50}
   range: 1000
-  radius: 1
+  radius: 0.3
+  scale: 1
   wideAim: 0
+  crossHairRectTransform: {fileID: 632210734}
+  joystick: {fileID: 1841457891}
+--- !u!114 &632210738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632210733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d96c7007e6922134ca7b1c8caceef690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gestureCompleted: 0
+  _tapProperty:
+    tapTime: 0.7
+    tapMaxDistance: 0.1
+  _swipeProperty:
+    minSwipeDistance: 2
+    swipeTime: 0.7
+  _spreadProperty: {fileID: 0}
+  _rotateProperty: {fileID: 0}
 --- !u!1 &1347770424
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,3 +985,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
   m_PrefabInstance: {fileID: 1841457889}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1841457891 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2929252283123773951, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
+  m_PrefabInstance: {fileID: 1841457889}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45977bbae16431c46a013576a1aea384, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

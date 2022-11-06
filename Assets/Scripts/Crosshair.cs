@@ -9,19 +9,23 @@ public class Crosshair : MonoBehaviour
     [SerializeField] private float sensitivity = 10.0f;
     [SerializeField] private Vector2 border;
     [Range(1.0f, 1000.0f)][SerializeField] private float range;
-    [Range(1.0f, 1000.0f)][SerializeField] private float radius;
+    [Range(0.1f, 3.0f)][SerializeField] private float radius;
+    [Range(0.1f, 10.0f)][SerializeField] private float scale;
     [SerializeField] bool wideAim;
 
-    RectTransform crossHairRectTransform;
-    Transform crossHairTransform;
-    //GameObject hitObj;
+    [Header("Manually Set if automatic is not working")]
+    [SerializeField] RectTransform crossHairRectTransform;
+    [SerializeField] Joystick joystick;
 
+    //Canvas
     RectTransform _canvasRectTransform;
-    Joystick joystick;
 
-    private Vector2 _position;
-    private Vector2 _border;
-    private float aspectRatio;
+    //Temp values
+    private Vector2 _position = new Vector2();
+    private Vector2 _border = new Vector2();
+
+    private float aspectRatio = 1.0f;
+    private Vector2 scaleVector = new Vector2();
 
     private List<GameObject> hitObjects = new List<GameObject>();
     // Start is called before the first frame update
@@ -29,24 +33,25 @@ public class Crosshair : MonoBehaviour
     {
         joystick = FindObjectOfType<Joystick>();
         crossHairRectTransform = gameObject.GetComponent<RectTransform>();
-        crossHairTransform = gameObject.transform;
         _canvasRectTransform = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        aspectRatio = Screen.width / (float)Screen.height;
+        aspectRatio = (float)Screen.width / Screen.height;
+        scaleVector.x = scale; scaleVector.y = scale;
+        crossHairRectTransform.localScale = scaleVector;
         Move();
         CastRay();
     }
 
     private void CastRay()
     {
-        RaycastHit[] hits = Physics.CapsuleCastAll(crossHairTransform.position, Vector3.forward * range, radius * aspectRatio, transform.forward, range);
-        if(hits.Length != 0)
+        RaycastHit[] hits = Physics.CapsuleCastAll(crossHairRectTransform.position, Vector3.forward * range, radius * aspectRatio * scale, transform.forward, range);
+        hitObjects.Clear();
+        if (hits.Length != 0)
         {
-            hitObjects.Clear();
             foreach (RaycastHit hit in hits)
             {
                 if (!hitObjects.Contains(hit.collider.gameObject))
@@ -105,7 +110,8 @@ public class Crosshair : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(crossHairTransform.position, Vector3.forward * radius);
+        Gizmos.color = Color.green;
+        //Gizmos.DrawLine(crossHairRectTransform.position, Vector3.forward * range);
+        Gizmos.DrawWireSphere(crossHairRectTransform.position, radius * aspectRatio * scale);
     }
 }
