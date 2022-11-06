@@ -10,14 +10,14 @@ public class Killable : MonoBehaviour
     private int maxHP;
     private bool isDead;
 
-    private void Start()
+    public virtual void Damage(int damage)
     {
-        GestureManager.Instance.OnSwipe += OnSwipe;
-    }
-
-    private void OnDisable()
-    {
-        GestureManager.Instance.OnSwipe -= OnSwipe;
+        currentHP -= damage;
+        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        if(currentHP <= 0)
+        {
+            Die();
+        }
     }
 
     public virtual void Die()
@@ -25,11 +25,5 @@ public class Killable : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void OnSwipe(object sender, SwipeEventArgs args)
-    {
-        if(args.HitObject != null)
-        {
-            args.HitObject.GetComponent<Killable>().Die();
-        }
-    }
+    
 }
