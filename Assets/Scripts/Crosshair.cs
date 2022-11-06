@@ -87,7 +87,7 @@ public class Crosshair : MonoBehaviour
         if (Physics.Raycast(crossHairRectTransform.position, Vector3.forward, out hit, range))
         {
             hitObject = hit.collider.gameObject;
-            Debug.Log(hitObject);
+            //Debug.Log(hitObject);
         }
         else
         {
