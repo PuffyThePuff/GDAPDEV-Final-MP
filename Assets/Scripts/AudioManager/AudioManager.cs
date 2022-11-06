@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource ambienceSource;
     [SerializeField] private AudioSource sfxSource;
 
-    public void PlayMusicLoop(AudioClip clip)
+    public void PlayMusicLoop(AudioClip clip, float volume)
     {
         if(clip == null) return;
 
@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
-    public void PlayAmbienceLoop(AudioClip clip)
+    public void PlayAmbienceLoop(AudioClip clip, float volume)
     {
         if (clip == null) return;
 
@@ -40,7 +40,7 @@ public class AudioManager : MonoBehaviour
         ambienceSource.Play();
     }
 
-    public void PlaySFX(AudioClip clip)
+    public void PlaySFX(AudioClip clip, float volume)
     {
         if (clip == null) return;
 

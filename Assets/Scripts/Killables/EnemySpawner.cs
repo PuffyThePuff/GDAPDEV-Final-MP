@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
             loops++;
         } while (!CanSpawnAtPosition(spawnPosition));
         
-        Enemy enemy = Instantiate(enemyPrefabs[index], my_transform.localPosition + spawnPosition, Quaternion.identity, my_transform.parent);
+        Enemy enemy = Instantiate(enemyPrefabs[index], my_transform.localPosition + spawnPosition, Quaternion.identity, my_transform);
         enemy.gameObject.SetActive(true);
         
     }
@@ -55,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
             float innerExtent = centerPoint.z - depth;
             float outerExtent = centerPoint.z + depth;
 
-            Debug.Log(new Vector4(leftExtent, rightExtent, lowerExtent, upperExtent));
+            //Debug.Log(new Vector4(leftExtent, rightExtent, lowerExtent, upperExtent));
             if(spawnPos.x >= leftExtent && spawnPos.x <= rightExtent &&
                 spawnPos.y >= lowerExtent && spawnPos.y <= upperExtent &&
                 spawnPos.z >= innerExtent && spawnPos.z <= outerExtent)

@@ -23,7 +23,7 @@ public class EnemyManager : MonoBehaviour
             {
                 if (args.SwipeDirection == enemy.SwipeWeakness)
                 {
-                    AudioManager.Instance.PlaySFX(slapSFX);
+                    AudioManager.Instance.PlaySFX(slapSFX, 1);
                     enemy.Die();
                 }
             }
