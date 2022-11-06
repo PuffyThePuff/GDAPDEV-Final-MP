@@ -58,7 +58,8 @@ public class GestureManager : MonoBehaviour
 
     void Update()
     {
-        if(cHair.CrosshairState == CrosshairState.moving)
+#if true
+        if (cHair.CrosshairState == CrosshairState.moving)
         {
             if (Input.touchCount > 1)
             {
@@ -76,7 +77,7 @@ public class GestureManager : MonoBehaviour
                 isPressed = false;
             }
         }
-        else if(cHair.CrosshairState == CrosshairState.moving)
+        else if(cHair.CrosshairState == CrosshairState.stopped)
         {
             if (Input.touchCount > 0)
             {
@@ -94,7 +95,7 @@ public class GestureManager : MonoBehaviour
                 isPressed = false;
             }
         }
-        
+#endif
     }
 
     protected virtual void CheckSingleFingerGestures()
@@ -209,7 +210,7 @@ public class GestureManager : MonoBehaviour
 
     protected void FireSwipeEvent()
     {
-        //Debug.Log("Swipe");
+        Debug.Log("Swipe");
         Vector2 direction = endPoint - startPoint;
         SwipeDirection swipeDir;
 
