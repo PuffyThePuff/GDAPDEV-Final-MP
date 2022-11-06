@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] private AudioClip slapSFX;
     private void Start()
     {
         GestureManager.Instance.OnSwipe += OnSwipe;
@@ -21,7 +22,10 @@ public class EnemyManager : MonoBehaviour
             if(args.HitObject.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 if (args.SwipeDirection == enemy.SwipeWeakness)
+                {
+                    AudioManager.Instance.PlaySFX(slapSFX);
                     enemy.Die();
+                }
             }
             
         }
