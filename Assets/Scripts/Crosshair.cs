@@ -1,11 +1,21 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-//using UnityEngine.UI;
 
-
+public enum CrosshairState { moving, stopped }
 public class Crosshair : MonoBehaviour
 {
+    public static Crosshair Instance;
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     [SerializeField] private float sensitivity = 10.0f;
     [SerializeField] private Vector2 border;
     [Range(1.0f, 1000.0f)][SerializeField] private float range;
@@ -27,7 +37,9 @@ public class Crosshair : MonoBehaviour
     private float aspectRatio = 1.0f;
     private Vector2 scaleVector = new Vector2();
 
-    private List<GameObject> hitObjects = new List<GameObject>();
+    //private List<GameObject> hitObjects = new List<GameObject>();
+    public GameObject hitObject { get; private set; } = null;
+    public CrosshairState CrosshairState { get; private set; } = CrosshairState.stopped;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +60,7 @@ public class Crosshair : MonoBehaviour
 
     private void CastRay()
     {
+#if false
         RaycastHit[] hits = Physics.CapsuleCastAll(crossHairRectTransform.position, Vector3.forward * range, radius * aspectRatio * scale, transform.forward, range);
         hitObjects.Clear();
         if (hits.Length != 0)
@@ -60,14 +73,35 @@ public class Crosshair : MonoBehaviour
                 }
             }
         }
+#endif
+#if false
+        Ray r = Camera.main.ScreenPointToRay(crossHairRectTransform.position);
+        RaycastHit hit;
+        if(Physics.Raycast(r, out hit, range))
+        {
+            hitObject = hit.collider.gameObject;
+            Debug.Log(hitObject);
+        }
+#endif
+        RaycastHit hit;
+        if (Physics.Raycast(crossHairRectTransform.position, Vector3.forward, out hit, range))
+        {
+            hitObject = hit.collider.gameObject;
+            Debug.Log(hitObject);
+        }
+        else
+        {
+            hitObject = null;
+        }
     }
     private void Move()
     {
         //If the joystick is not touched
         if (joystick.Direction.x != 0.0f || joystick.Direction.y != 0.0f)
         {
+            CrosshairState = CrosshairState.moving;
             //Debug.Log(_canvasRectTransform.rect);
-            #region Set the borders based on orientation
+#region Set the borders based on orientation
             //Debug.Log(aspectRatio);
 #if true
             if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeRight)
@@ -102,9 +136,13 @@ public class Crosshair : MonoBehaviour
                     (_canvasRectTransform.rect.yMin)) + (crossHairRectTransform.rect.height / 2.0f) + _border.y,
                     (_canvasRectTransform.rect.yMax) - (crossHairRectTransform.rect.height / 2.0f) - _border.y
                 );
-            #endregion
+#endregion
 
             crossHairRectTransform.localPosition = _position;
+        }
+        else
+        {
+            CrosshairState = CrosshairState.stopped;
         }
     }
 

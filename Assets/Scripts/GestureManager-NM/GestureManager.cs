@@ -35,6 +35,7 @@ public class GestureManager : MonoBehaviour
     public SpreadProperty _spreadProperty;
     public RotateProperty _rotateProperty;
 
+
     protected Vector2 startPoint = Vector2.zero;
     protected Vector2 endPoint = Vector2.zero;
     protected float gestureTime = 0f;
@@ -44,28 +45,56 @@ public class GestureManager : MonoBehaviour
     protected Gestures gestures;
     public bool isPressed = false;
 
+    private Crosshair cHair;
     private void Awake()
     {
         InitializeSingleton();
     }
 
+    private void Start()
+    {
+        cHair = Crosshair.Instance;
+    }
+
     void Update()
     {
-        if(Input.touchCount > 0)
+        if(cHair.CrosshairState == CrosshairState.moving)
         {
-            if (Input.touchCount == 1)
+            if (Input.touchCount > 1)
             {
-                CheckSingleFingerGestures();
+                if (Input.touchCount == 2)
+                {
+                    CheckSingleFingerGestures();
+                }
+                else if (Input.touchCount > 2)
+                {
+                    CheckMultipleFingerGestures();
+                }
             }
-            else if(Input.touchCount > 1)
+            else
             {
-                CheckMultipleFingerGestures();
+                isPressed = false;
             }
         }
-        else
+        else if(cHair.CrosshairState == CrosshairState.moving)
         {
-            isPressed = false;
+            if (Input.touchCount > 0)
+            {
+                if (Input.touchCount == 1)
+                {
+                    CheckSingleFingerGestures();
+                }
+                else if (Input.touchCount > 1)
+                {
+                    CheckMultipleFingerGestures();
+                }
+            }
+            else
+            {
+                isPressed = false;
+            }
         }
+        
     }
 
     protected virtual void CheckSingleFingerGestures()
@@ -151,13 +180,15 @@ public class GestureManager : MonoBehaviour
     protected void FireTapEvent(Vector2 pos)
     {
         Debug.Log("Tap!");
-        GameObject hitObject = null;
+        GameObject hitObject = Crosshair.Instance.hitObject;
+#if false
         Ray r = Camera.main.ScreenPointToRay(pos);
         RaycastHit hit;
         if(Physics.Raycast(r, out hit, Mathf.Infinity))
         {
             hitObject = hit.collider.gameObject;
         }
+#endif
 
         TapEventArgs tapArgs = new TapEventArgs(pos, hitObject);
         // Notify tap listeners with tap event
@@ -210,13 +241,15 @@ public class GestureManager : MonoBehaviour
             }
         }
 
-        GameObject hitObj = null;
+        GameObject hitObj = Crosshair.Instance.hitObject;
+#if false
         Ray r = Camera.main.ScreenPointToRay(startPoint);
         RaycastHit hit;
         if(Physics.Raycast(r, out hit, Mathf.Infinity))
         {
             hitObj = hit.collider.gameObject;
         }
+#endif
 
         SwipeEventArgs swipeArgs = new SwipeEventArgs(swipeDir, startPoint, direction, hitObj);
         if(OnSwipe != null)
@@ -237,6 +270,7 @@ public class GestureManager : MonoBehaviour
     protected void FireDragEvent()
     {
         Debug.Log("Drag");
+#if false
         Ray r = Camera.main.ScreenPointToRay(trackedFinger1.position);
         RaycastHit hit;
         GameObject hitObj = null;
@@ -245,6 +279,8 @@ public class GestureManager : MonoBehaviour
         {
             hitObj = hit.collider.gameObject;
         }
+#endif
+        GameObject hitObj = Crosshair.Instance.hitObject;
 
         DragEventArgs dragEvent = new DragEventArgs(trackedFinger1, hitObj);
 
