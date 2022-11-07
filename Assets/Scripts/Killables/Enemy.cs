@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Enemy : Killable
 {
+    [SerializeField] private EnemyAnimationManager m_AnimationManager;
     [SerializeField] private SwipeDirection swipeWeakness;
     public SwipeDirection SwipeWeakness
     {
@@ -16,6 +17,8 @@ public class Enemy : Killable
     public override void Die()
     {
         base.Die();
-        Destroy(gameObject);
+        m_AnimationManager.PlayDeathAnim(swipeWeakness);
     }
+
+    
 }

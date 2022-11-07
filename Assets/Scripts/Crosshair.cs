@@ -19,9 +19,9 @@ public class Crosshair : MonoBehaviour
     [SerializeField] private float sensitivity = 10.0f;
     [SerializeField] private Vector2 border;
     [Range(1.0f, 1000.0f)][SerializeField] private float range;
-    [Range(0.1f, 3.0f)][SerializeField] private float radius;
-    [Range(0.1f, 10.0f)][SerializeField] private float scale;
-    [SerializeField] bool wideAim;
+    //[Range(0.1f, 3.0f)][SerializeField] private float radius;
+    //[Range(0.1f, 10.0f)][SerializeField] private float scale;
+    //[SerializeField] bool wideAim;
 
     [Header("Manually Set if automatic is not working")]
     [SerializeField] RectTransform crossHairRectTransform;
@@ -33,10 +33,9 @@ public class Crosshair : MonoBehaviour
     //Temp values
     private Vector2 _position = new Vector2();
     private Vector2 _border = new Vector2();
-    public Vector2 Border { get { return _border; } }
+    public Vector2 Border { get { return border; } }
 
-    public float aspectRatio { get; private set; } = 1.0f;
-    private Vector2 scaleVector = new Vector2();
+    //private Vector2 scaleVector = new Vector2();
 
     //private List<GameObject> hitObjects = new List<GameObject>();
     public GameObject hitObject { get; private set; } = null;
@@ -52,9 +51,8 @@ public class Crosshair : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        aspectRatio = (float)Screen.width / Screen.height;
-        scaleVector.x = scale; scaleVector.y = scale;
-        crossHairRectTransform.localScale = scaleVector;
+        //scaleVector.x = scale; scaleVector.y = scale;
+        //crossHairRectTransform.localScale = scaleVector;
         Move();
         CastRay();
     }
@@ -84,6 +82,7 @@ public class Crosshair : MonoBehaviour
             Debug.Log(hitObject);
         }
 #endif
+
         RaycastHit hit;
         if (Physics.Raycast(crossHairRectTransform.position, Vector3.forward, out hit, range))
         {
@@ -101,9 +100,10 @@ public class Crosshair : MonoBehaviour
         if (joystick.Direction.x != 0.0f || joystick.Direction.y != 0.0f)
         {
             CrosshairState = CrosshairState.moving;
+            float aspectRatio = Utils.AspectRatio();
             //Debug.Log(_canvasRectTransform.rect);
-#region Set the borders based on orientation
-            //Debug.Log(aspectRatio);
+            #region Set the borders based on orientation
+            //Debug.Log(Utils.AspectRatio());
 #if true
             if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeRight)
             {
@@ -145,12 +145,5 @@ public class Crosshair : MonoBehaviour
         {
             CrosshairState = CrosshairState.stopped;
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        //Gizmos.DrawLine(crossHairRectTransform.position, Vector3.forward * range);
-        Gizmos.DrawWireSphere(crossHairRectTransform.position, radius * aspectRatio * scale);
     }
 }
