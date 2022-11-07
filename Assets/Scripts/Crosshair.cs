@@ -33,8 +33,9 @@ public class Crosshair : MonoBehaviour
     //Temp values
     private Vector2 _position = new Vector2();
     private Vector2 _border = new Vector2();
+    public Vector2 Border { get { return _border; } }
 
-    private float aspectRatio = 1.0f;
+    public float aspectRatio { get; private set; } = 1.0f;
     private Vector2 scaleVector = new Vector2();
 
     //private List<GameObject> hitObjects = new List<GameObject>();

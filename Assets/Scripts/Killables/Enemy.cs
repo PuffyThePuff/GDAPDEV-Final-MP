@@ -8,7 +8,6 @@ using UnityEngine;
 public class Enemy : Killable
 {
     [SerializeField] private SwipeDirection swipeWeakness;
-    
     public SwipeDirection SwipeWeakness
     {
         get { return swipeWeakness; }

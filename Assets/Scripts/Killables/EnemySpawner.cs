@@ -5,15 +5,19 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Enemy[] enemyPrefabs;
-    [SerializeField] private Vector3 spawnArea;
+    [Header("Reference Canvas")]
+    [SerializeField] private RectTransform canvasRectTransform;
+    [SerializeField] private Vector2 spawnArea;
 
+    Crosshair crosshair;
     Transform my_transform;
     Vector3 spawnPosition;
     // Start is called before the first frame update
     void Start()
     {
+        crosshair = Crosshair.Instance;
         my_transform = transform;
-        InvokeRepeating("Spawn", 0.0f, 3.0f);
+        InvokeRepeating("Spawn", 0.0f, 0.2f);
     }
 
     public void Spawn()
@@ -22,24 +26,31 @@ public class EnemySpawner : MonoBehaviour
         int loops = 0;
         do
         {
-            if(loops >= 50) { break; }
+            if (loops >= 50) { break; }
 
-            spawnPosition.x = Random.Range(-spawnArea.x / 2.0f, spawnArea.x / 2.0f);
-            spawnPosition.y = Random.Range(-spawnArea.y / 2.0f, spawnArea.y / 2.0f);
-            spawnPosition.z = Random.Range(-spawnArea.z / 2.0f, spawnArea.z / 2.0f);
-            //Debug.Log(spawnPosition);
-            if (CanSpawnAtPosition(spawnPosition)) break;
+            float minAreaX = canvasRectTransform.position.x - (((canvasRectTransform.rect.width / 2.0f) + crosshair.Border.x + (spawnArea.x * crosshair.aspectRatio)) * canvasRectTransform.localScale.x);// + crosshair.Border.x + (spawnArea.x * crosshair.aspectRatio));
+            float maxAreaX = canvasRectTransform.position.x + (((canvasRectTransform.rect.width / 2.0f - crosshair.Border.x - (spawnArea.x * crosshair.aspectRatio)) * canvasRectTransform.localScale.x// - crosshair.Border.x - (spawnArea.x * crosshair.aspectRatio));
+            float minAreaY = canvasRectTransform.position.y - (canvasRectTransform.rect.height / 2.0f * canvasRectTransform.localScale.y);// + crosshair.Border.y + (spawnArea.y * crosshair.aspectRatio));
+            float maxAreaY = canvasRectTransform.position.y + (canvasRectTransform.rect.height / 2.0f * canvasRectTransform.localScale.y);// - crosshair.Border.y - (spawnArea.y * crosshair.aspectRatio));
+            float minAreaZ = canvasRectTransform.position.z - 1.0f;
+            float maxAreaZ = canvasRectTransform.position.z - 2.0f;
+
+            spawnPosition.x = Random.Range(minAreaX, maxAreaX);
+            spawnPosition.y = Random.Range(minAreaY, maxAreaY);
+            spawnPosition.z = Random.Range(minAreaZ, maxAreaZ);
+
+            if (CanSpawnAtPosition(my_transform.position + spawnPosition)) break;
             loops++;
-        } while (!CanSpawnAtPosition(spawnPosition));
+        } while (!CanSpawnAtPosition(my_transform.position + spawnPosition));
         
-        Enemy enemy = Instantiate(enemyPrefabs[index], my_transform.localPosition + spawnPosition, Quaternion.identity, my_transform);
+        Enemy enemy = Instantiate(enemyPrefabs[index], my_transform.position + spawnPosition, Quaternion.identity, my_transform);
         enemy.gameObject.SetActive(true);
         
     }
 
     public bool CanSpawnAtPosition(Vector3 spawnPos)
     {
-        Debug.Log("Repositioning");
+        //Debug.Log("Repositioning");
         Collider[] colliders = Physics.OverlapSphere(transform.position, 100.0f);
         for(int i = 0; i < colliders.Length; i++)
         {
@@ -67,9 +78,9 @@ public class EnemySpawner : MonoBehaviour
         return true;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position, spawnArea);
+        //Gizmos.DrawWireCube(transform.position * aspectRatio, spawnArea * aspectRatio);
     }
 }
