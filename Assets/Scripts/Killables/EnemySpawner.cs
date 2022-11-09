@@ -29,7 +29,7 @@ public class EnemySpawner : MonoBehaviour
             if (loops >= 50) { break; }
 
             float minAreaX = canvasRectTransform.position.x - (((canvasRectTransform.rect.width / 2.0f) + crosshair.Border.x + (spawnArea.x * crosshair.aspectRatio)) * canvasRectTransform.localScale.x);// + crosshair.Border.x + (spawnArea.x * crosshair.aspectRatio));
-            float maxAreaX = canvasRectTransform.position.x + (((canvasRectTransform.rect.width / 2.0f - crosshair.Border.x - (spawnArea.x * crosshair.aspectRatio)) * canvasRectTransform.localScale.x// - crosshair.Border.x - (spawnArea.x * crosshair.aspectRatio));
+            float maxAreaX = canvasRectTransform.position.x + (((canvasRectTransform.rect.width / 2.0f - crosshair.Border.x - (spawnArea.x * crosshair.aspectRatio)) * canvasRectTransform.localScale.x));// - crosshair.Border.x - (spawnArea.x * crosshair.aspectRatio));
             float minAreaY = canvasRectTransform.position.y - (canvasRectTransform.rect.height / 2.0f * canvasRectTransform.localScale.y);// + crosshair.Border.y + (spawnArea.y * crosshair.aspectRatio));
             float maxAreaY = canvasRectTransform.position.y + (canvasRectTransform.rect.height / 2.0f * canvasRectTransform.localScale.y);// - crosshair.Border.y - (spawnArea.y * crosshair.aspectRatio));
             float minAreaZ = canvasRectTransform.position.z - 1.0f;
