@@ -8,6 +8,9 @@ public class Config : MonoBehaviour
     public static int startingMoney = 0;
     public static bool infiniteHealth = false;
 
+    //notification interval time
+    public static float notificationIntervalTime = 0f;
+
     [SerializeField] private GameObject ConfigMenu;
 
     #region singleton code
