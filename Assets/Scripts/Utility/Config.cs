@@ -57,5 +57,8 @@ public class Config : MonoBehaviour
         infiniteHealth = !infiniteHealth;
     }
 
+    public void OnGenerateNotificationPressed()
+    {
 
+    }
 }
