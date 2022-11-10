@@ -900,6 +900,7 @@ PlayerSettings:
   vrEditorSettings: {}
   cloudServicesEnabled:
     UNet: 1
+    Unity Ads: 1
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -913,11 +914,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 26b57138-5429-41a3-adc3-f61c4aff24c9
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: GDAPDEV MP
+  organizationId: puffy_the_puff
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
