@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Config : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Config : MonoBehaviour
     public static bool infiniteHealth = false;
 
     //notification interval time
-    public static float notificationIntervalTime = 0f;
+    public static int notificationIntervalTime = 0;
 
     [SerializeField] private GameObject ConfigMenu;
 
@@ -60,5 +61,10 @@ public class Config : MonoBehaviour
     public void OnGenerateNotificationPressed()
     {
         NotificationHandler.Singleton.SendSimpleNotification();
+    }
+
+    public void OnNotificationIntervalChanged(InputField field)
+    {
+        notificationIntervalTime = int.Parse(field.text);
     }
 }

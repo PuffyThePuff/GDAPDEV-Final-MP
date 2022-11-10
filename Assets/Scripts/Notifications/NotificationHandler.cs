@@ -80,12 +80,12 @@ public class NotificationHandler : MonoBehaviour
         AndroidNotificationCenter.SendNotification(notif, default);
     }
 
-    public void SendRepeatNotification()
+    public void SendRepeatNotification(int seconds = 30)
     {
         string notif_title = "Repeat Notif";
         string notif_message = "Repeat Notification Get!";
         System.DateTime fireTime = System.DateTime.Now.AddSeconds(10);
-        System.TimeSpan timeSpan = new System.TimeSpan(0, 0, 30);   //hours, minutes, seconds
+        System.TimeSpan timeSpan = new System.TimeSpan(0, 0, seconds);   //hours, minutes, seconds
 
         AndroidNotification notif = new AndroidNotification(notif_title, notif_message, fireTime, timeSpan);
 
