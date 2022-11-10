@@ -59,6 +59,6 @@ public class Config : MonoBehaviour
 
     public void OnGenerateNotificationPressed()
     {
-
+        NotificationHandler.Singleton.SendSimpleNotification();
     }
 }
