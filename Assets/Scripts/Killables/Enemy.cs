@@ -42,7 +42,15 @@ public class Enemy : Killable
 
 	private void inflictDmg()
 	{
-		gameManager.GetComponent<Player>().updateHpValue(-1);
+		if (Config.Singleton != null && Config.infiniteHealth == false)
+        {
+			Debug.Log("Damage taken!");
+			gameManager.GetComponent<Player>().updateHpValue(-1);
+        }
+		else
+        {
+			Debug.Log("Infinite Health On!");
+        }
 	}
 
     public override void Die()
