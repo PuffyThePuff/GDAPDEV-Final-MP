@@ -56,10 +56,11 @@ public class Enemy : Killable
     public override void Die()
     {
         base.Die();
-        SpawnCurrency();
+        //SpawnCurrency();
         Destroy(gameObject);
     }
 
+    /*
     public void SpawnCurrency()
     {
         int i = 0;
@@ -68,4 +69,5 @@ public class Enemy : Killable
            // Currency newCoin = Instantiate(enemyCurrency, new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f), 0), Quaternion.identity);
         }
     }
+    */
 }

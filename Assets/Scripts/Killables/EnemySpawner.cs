@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Enemy[] enemyPrefabs;
+    [SerializeField] private Enemy2[] enemy2Prefabs;
     [Header("Reference Canvas")]
     [SerializeField] private RectTransform canvasRectTransform;
     [SerializeField] private Vector2 spawnArea;
@@ -23,6 +24,7 @@ public class EnemySpawner : MonoBehaviour
     public void Spawn()
     {
         int index = Random.Range(0, enemyPrefabs.Length); //minInclusive, maxExclusive
+        int index2 = Random.Range(0, enemy2Prefabs.Length);
         int loops = 0;
         do
         {
@@ -44,7 +46,9 @@ public class EnemySpawner : MonoBehaviour
         } while (!CanSpawnAtPosition(my_transform.position + spawnPosition));
         
         Enemy enemy = Instantiate(enemyPrefabs[index], my_transform.position + spawnPosition, Quaternion.identity, my_transform);
+        Enemy2 enemy2 = Instantiate(enemy2Prefabs[index2], my_transform.position + spawnPosition + new Vector3(Random.Range(-5,5), Random.Range(-5, 5), Random.Range(-5, 5)), Quaternion.identity, my_transform);
         enemy.gameObject.SetActive(true);
+        enemy2.gameObject.SetActive(true);
         
     }
 
@@ -83,4 +87,6 @@ public class EnemySpawner : MonoBehaviour
         Gizmos.color = Color.green;
         //Gizmos.DrawWireCube(transform.position * aspectRatio, spawnArea * aspectRatio);
     }
+
+   
 }

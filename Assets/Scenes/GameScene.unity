@@ -1289,6 +1289,9 @@ MonoBehaviour:
   - {fileID: 4748838949446282711, guid: 0d91986f676340d4a89d4a4605e36e81, type: 3}
   - {fileID: 7627197940592999593, guid: 0a20f9d2eab227d4eb5c5023fd7533f0, type: 3}
   - {fileID: 2498950125125335370, guid: a470143f7aa1a3a40b416d7fd0618ce3, type: 3}
+  enemy2Prefabs:
+  - {fileID: 1746075396427998970, guid: 363a07de8719591448d8b9dbe00eb38b, type: 3}
+  - {fileID: 4143554981627944000, guid: 64533b995f4928d4595105edfc0ca015, type: 3}
   canvasRectTransform: {fileID: 366220724}
   spawnArea: {x: 300, y: 300}
 --- !u!1 &1549441230
@@ -1392,7 +1395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1780295437
 SpriteRenderer:
   m_ObjectHideFlags: 0
