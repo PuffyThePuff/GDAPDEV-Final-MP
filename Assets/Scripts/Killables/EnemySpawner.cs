@@ -31,24 +31,26 @@ public class EnemySpawner : MonoBehaviour
         {
             if (loops >= 50) { break; }
 
-            float minAreaX = canvasRectTransform.position.x - ((canvasRectTransform.rect.width / 2.0f) + crosshair.Border.x + (spawnArea.x * crosshair.aspectRatio) * canvasRectTransform.localScale.x);// + crosshair.Border.x + (spawnArea.x * crosshair.aspectRatio));
-            float maxAreaX = canvasRectTransform.position.x + ((canvasRectTransform.rect.width / 2.0f) - crosshair.Border.x - (spawnArea.x * crosshair.aspectRatio) * canvasRectTransform.localScale.x);// - crosshair.Border.x - (spawnArea.x * crosshair.aspectRatio));
-            float minAreaY = canvasRectTransform.position.y - ((canvasRectTransform.rect.height / 2.0f) + crosshair.Border.y + (spawnArea.y * crosshair.aspectRatio) * canvasRectTransform.localScale.y);// + crosshair.Border.y + (spawnArea.y * crosshair.aspectRatio));
-            float maxAreaY = canvasRectTransform.position.y + ((canvasRectTransform.rect.height / 2.0f) - crosshair.Border.y - (spawnArea.y * crosshair.aspectRatio) * canvasRectTransform.localScale.y);// - crosshair.Border.y - (spawnArea.y * crosshair.aspectRatio));
-            float minAreaZ = canvasRectTransform.position.z - 1.0f;
-            float maxAreaZ = canvasRectTransform.position.z - 2.0f;
+            float minAreaX = canvasRectTransform.position.x - ((canvasRectTransform.rect.width / 2.0f) * canvasRectTransform.localScale.x);// + crosshair.Border.x + (spawnArea.x * crosshair.aspectRatio));
+            float maxAreaX = canvasRectTransform.position.x + ((canvasRectTransform.rect.width / 2.0f) * canvasRectTransform.localScale.x);// - crosshair.Border.x - (spawnArea.x * crosshair.aspectRatio));
+            float minAreaY = canvasRectTransform.position.y - ((canvasRectTransform.rect.height / 2.0f) * canvasRectTransform.localScale.y);// + crosshair.Border.y + (spawnArea.y * crosshair.aspectRatio));
+            float maxAreaY = canvasRectTransform.position.y + ((canvasRectTransform.rect.height / 2.0f) * canvasRectTransform.localScale.y);// - crosshair.Border.y - (spawnArea.y * crosshair.aspectRatio));
+            float minAreaZ = 1.0f;
+            float maxAreaZ = 2.0f;
 
             spawnPosition.x = Random.Range(minAreaX, maxAreaX);
             spawnPosition.y = Random.Range(minAreaY, maxAreaY);
             spawnPosition.z = Random.Range(minAreaZ, maxAreaZ);
 
-            if (CanSpawnAtPosition(my_transform.position + spawnPosition)) break;
+            //Debug.Log(spawnPosition.ToString());
+            if (CanSpawnAtPosition(canvasRectTransform.localPosition + spawnPosition)) break;
             loops++;
-        } while (!CanSpawnAtPosition(my_transform.position + spawnPosition));
+        } while (!CanSpawnAtPosition(canvasRectTransform.localPosition + spawnPosition));
         
         //Enemy enemy = Instantiate(enemyPrefabs[index], my_transform.position + spawnPosition, Quaternion.identity, my_transform);
         //Enemy2 enemy2 = Instantiate(enemy2Prefabs[index2], my_transform.position + spawnPosition + new Vector3(Random.Range(-5,5), Random.Range(-5, 5), Random.Range(-5, 5)), Quaternion.identity, my_transform);
-        Killable killable = Instantiate(killablePrefabs[index], my_transform.position + spawnPosition, Quaternion.identity, my_transform);
+        Killable killable = Instantiate(killablePrefabs[index], canvasRectTransform.localPosition + spawnPosition, Quaternion.identity);
+        //Debug.Log((canvasRectTransform.localPosition + spawnPosition).ToString());
         killable.gameObject.SetActive(true);
         //enemy.gameObject.SetActive(true);
         //enemy2.gameObject.SetActive(true);
@@ -83,21 +85,5 @@ public class EnemySpawner : MonoBehaviour
         }
 
         return true;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        float minAreaX = canvasRectTransform.position.x - ((canvasRectTransform.rect.width / 2.0f) + crosshair.Border.x + (spawnArea.x * crosshair.aspectRatio) * canvasRectTransform.localScale.x);// + crosshair.Border.x + (spawnArea.x * crosshair.aspectRatio));
-        float maxAreaX = canvasRectTransform.position.x + ((canvasRectTransform.rect.width / 2.0f) - crosshair.Border.x - (spawnArea.x * crosshair.aspectRatio) * canvasRectTransform.localScale.x);// - crosshair.Border.x - (spawnArea.x * crosshair.aspectRatio));
-        float minAreaY = canvasRectTransform.position.y - ((canvasRectTransform.rect.height / 2.0f) + crosshair.Border.y + (spawnArea.y * crosshair.aspectRatio) * canvasRectTransform.localScale.y);// + crosshair.Border.y + (spawnArea.y * crosshair.aspectRatio));
-        float maxAreaY = canvasRectTransform.position.y + ((canvasRectTransform.rect.height / 2.0f) - crosshair.Border.y - (spawnArea.y * crosshair.aspectRatio) * canvasRectTransform.localScale.y);// - crosshair.Border.y - (spawnArea.y * crosshair.aspectRatio));
-        float minAreaZ = canvasRectTransform.position.z - 1.0f;
-        float maxAreaZ = canvasRectTransform.position.z - 2.0f;
-        
-        Vector3 min = new Vector3(minAreaX, minAreaY, minAreaZ);
-        Vector3 max = new Vector3(maxAreaX, maxAreaY, maxAreaZ);
-
-        Gizmos.DrawLine(min, max);
     }
 }

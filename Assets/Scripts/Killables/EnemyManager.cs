@@ -17,8 +17,6 @@ public class EnemyManager : MonoBehaviour
         GestureManager.Instance.OnSpread -= OnSpread;
     }
 
-
-
     public void OnSwipe(object sender, SwipeEventArgs args)
     {
         if (args.HitObject != null)

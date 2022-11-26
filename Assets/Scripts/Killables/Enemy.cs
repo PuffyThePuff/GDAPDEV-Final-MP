@@ -14,7 +14,7 @@ public class Enemy : Killable
 
 	[SerializeField] private float maxTime = 10.0f;
 	private float timeLeft = 10.0f;
-	GameObject gameManager;
+	Player player;
     private Currency enemyCurrency;
 
 	private static readonly int SWIPE_UP = Animator.StringToHash("Swipe_UP");
@@ -24,9 +24,12 @@ public class Enemy : Killable
     
 	private void Start()
     {
-		gameManager = GameObject.FindGameObjectWithTag("GameController");
+        timeLeft = 10.0f;
+        player = FindObjectOfType<Player>();
 	}
-	private void FixedUpdate()
+
+	
+	private void Update()
 	{
 		if(timeLeft > 0)
 		{
@@ -47,10 +50,11 @@ public class Enemy : Killable
 
 	private void Attack()
 	{
-		if (Config.Singleton != null && Config.infiniteHealth == false)
+        player.Damage(1);
+        if (Config.Singleton != null && Config.infiniteHealth == false)
         {
 			Debug.Log("Damage taken!");
-			gameManager.GetComponent<Player>().Damage(-1);
+            player.Damage(-1);
         }
 		else
         {
