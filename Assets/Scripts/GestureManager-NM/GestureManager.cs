@@ -243,7 +243,7 @@ public class GestureManager : MonoBehaviour
             }
         }
 
-        GameObject hitObj = Crosshair.Instance.hitObject;
+        GameObject hitObj = cHair.hitObject;
 #if false
         Ray r = Camera.main.ScreenPointToRay(startPoint);
         RaycastHit hit;
@@ -264,9 +264,12 @@ public class GestureManager : MonoBehaviour
             if(hitObj.TryGetComponent<ISwipeable>(out ISwipeable swipeable))
             {
                 swipeable.OnSwipe(swipeArgs);
+                Debug.Log(hitObj.name);
             }
         }
         isPressed = true;
+
+       
     }
 
     protected void FireDragEvent()

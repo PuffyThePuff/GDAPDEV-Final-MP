@@ -50,7 +50,7 @@ public class Crosshair : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         aspectRatio = (float)Screen.width / Screen.height;
         scaleVector.x = scale; scaleVector.y = scale;
@@ -88,7 +88,7 @@ public class Crosshair : MonoBehaviour
         if (Physics.Raycast(crossHairRectTransform.position, Vector3.forward, out hit, range))
         {
             hitObject = hit.collider.gameObject;
-            //Debug.Log(hitObject);
+            Debug.Log(hitObject);
         }
         else
         {
@@ -121,8 +121,8 @@ public class Crosshair : MonoBehaviour
 #endregion
             //----------------------
 #region Set coordinates for the crosshair position
-            float x = (joystick.Direction.x * sensitivity * Time.fixedDeltaTime) + crossHairRectTransform.localPosition.x;
-            float y = (joystick.Direction.y * sensitivity * Time.fixedDeltaTime) + crossHairRectTransform.localPosition.y;
+            float x = (joystick.Direction.x * sensitivity * Time.deltaTime) + crossHairRectTransform.localPosition.x;
+            float y = (joystick.Direction.y * sensitivity * Time.deltaTime) + crossHairRectTransform.localPosition.y;
 #endregion
             //----------------------
 #region Clamp direction to Screen

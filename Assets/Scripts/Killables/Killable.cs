@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class Killable : MonoBehaviour
 {
-    [SerializeField] private int startingHP;
-    [SerializeField] private int maxHP;
+    [SerializeField] protected int startingHP;
+    [SerializeField] protected int maxHP;
 
-    private int currentHP;
-    private bool isDead;
+    protected int currentHP;
+    protected bool isDead;
 
     public void OnEnable()
     {
+        currentHP = startingHP;
         isDead = false;
     }
 
@@ -32,5 +33,8 @@ public class Killable : MonoBehaviour
         //Destroy(gameObject);
     }
 
-    
+    public void SelfDestruct()
+    {
+        Destroy(gameObject);
+    }
 }

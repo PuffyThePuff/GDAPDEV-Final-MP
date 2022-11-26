@@ -3,27 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Player : MonoBehaviour
+public class Player : Killable
 {
-
-	[SerializeField] private int PlayerMaxHP = 5;
-	[SerializeField] private int PlayerCurrHP;
 	[SerializeField] private TMP_Text PlayerHPText;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-		PlayerCurrHP = PlayerMaxHP;
-    }
 
     // Update is called once per frame
     void Update()
     {
-		PlayerHPText.SetText($"HP: {PlayerCurrHP}");
+		PlayerHPText.SetText($"HP: {currentHP}");
     }
 
-	public void updateHpValue(int value)
-	{
-		PlayerCurrHP += value;
-	}
+    public override void Damage(int damage)
+    {
+        base.Damage(damage);
+        PlayerHPText.SetText($"HP: {currentHP}");
+    }
 }

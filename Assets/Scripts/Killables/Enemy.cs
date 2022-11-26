@@ -9,15 +9,20 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Enemy : Killable
 {
+	[SerializeField] private Animator animator;
     [SerializeField] private SwipeDirection swipeWeakness;
 
 	[SerializeField] private float maxTime = 10.0f;
 	private float timeLeft = 10.0f;
 	GameObject gameManager;
     private Currency enemyCurrency;
-	
 
-    private void Start()
+	private static readonly int SWIPE_UP = Animator.StringToHash("Swipe_UP");
+    private static readonly int SWIPE_DOWN = Animator.StringToHash("Swipe_DOWN");
+    private static readonly int SWIPE_LEFT = Animator.StringToHash("Swipe_LEFT");
+    private static readonly int SWIPE_RIGHT = Animator.StringToHash("Swipe_RIGHT");
+    
+	private void Start()
     {
 		gameManager = GameObject.FindGameObjectWithTag("GameController");
 	}
@@ -30,7 +35,7 @@ public class Enemy : Killable
 		else
 		{
 			timeLeft = maxTime;
-			inflictDmg();
+			Attack();
 			Die();
 		}
 	}
@@ -40,12 +45,12 @@ public class Enemy : Killable
         get { return swipeWeakness; }
     }
 
-	private void inflictDmg()
+	private void Attack()
 	{
 		if (Config.Singleton != null && Config.infiniteHealth == false)
         {
 			Debug.Log("Damage taken!");
-			gameManager.GetComponent<Player>().updateHpValue(-1);
+			gameManager.GetComponent<Player>().Damage(-1);
         }
 		else
         {
@@ -56,8 +61,24 @@ public class Enemy : Killable
     public override void Die()
     {
         base.Die();
+
+		switch (swipeWeakness)
+		{
+			case SwipeDirection.RIGHT:
+				animator.Play(SWIPE_RIGHT);
+				break;
+			case SwipeDirection.LEFT:
+                animator.Play(SWIPE_LEFT);
+                break;
+			case SwipeDirection.UP:
+                animator.Play(SWIPE_UP);
+                break;
+			case SwipeDirection.DOWN:
+                animator.Play(SWIPE_DOWN);
+                break;
+		}
         //SpawnCurrency();
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     /*

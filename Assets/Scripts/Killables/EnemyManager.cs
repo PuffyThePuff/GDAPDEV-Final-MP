@@ -23,7 +23,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (args.HitObject != null)
         {
-            if(args.HitObject.TryGetComponent<Enemy>(out Enemy enemy))
+            if(args.HitObject.TryGetComponent(out Enemy enemy))
             {
                 if (args.SwipeDirection == enemy.SwipeWeakness)
                 {
