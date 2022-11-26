@@ -83,5 +83,21 @@ public class EnemySpawner : MonoBehaviour
         }
 
         return true;
-    }   
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        float minAreaX = canvasRectTransform.position.x - ((canvasRectTransform.rect.width / 2.0f) + crosshair.Border.x + (spawnArea.x * crosshair.aspectRatio) * canvasRectTransform.localScale.x);// + crosshair.Border.x + (spawnArea.x * crosshair.aspectRatio));
+        float maxAreaX = canvasRectTransform.position.x + ((canvasRectTransform.rect.width / 2.0f) - crosshair.Border.x - (spawnArea.x * crosshair.aspectRatio) * canvasRectTransform.localScale.x);// - crosshair.Border.x - (spawnArea.x * crosshair.aspectRatio));
+        float minAreaY = canvasRectTransform.position.y - ((canvasRectTransform.rect.height / 2.0f) + crosshair.Border.y + (spawnArea.y * crosshair.aspectRatio) * canvasRectTransform.localScale.y);// + crosshair.Border.y + (spawnArea.y * crosshair.aspectRatio));
+        float maxAreaY = canvasRectTransform.position.y + ((canvasRectTransform.rect.height / 2.0f) - crosshair.Border.y - (spawnArea.y * crosshair.aspectRatio) * canvasRectTransform.localScale.y);// - crosshair.Border.y - (spawnArea.y * crosshair.aspectRatio));
+        float minAreaZ = canvasRectTransform.position.z - 1.0f;
+        float maxAreaZ = canvasRectTransform.position.z - 2.0f;
+        
+        Vector3 min = new Vector3(minAreaX, minAreaY, minAreaZ);
+        Vector3 max = new Vector3(maxAreaX, maxAreaY, maxAreaZ);
+
+        Gizmos.DrawLine(min, max);
+    }
 }
