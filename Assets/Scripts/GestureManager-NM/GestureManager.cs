@@ -46,7 +46,6 @@ public class GestureManager : MonoBehaviour
     public bool isPressed = false;
 
     private Crosshair cHair;
-
     private void Awake()
     {
         InitializeSingleton();
