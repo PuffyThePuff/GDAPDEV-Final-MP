@@ -6,8 +6,9 @@ using TMPro;
 public class Player : Killable
 {
 	[SerializeField] private TMP_Text PlayerHPText;
+    [SerializeField] private Animator playerAnimator;
 
-    // Update is called once per frame
+    private static readonly int _Damage = Animator.StringToHash("Damage");
     void Update()
     {
 		PlayerHPText.SetText($"HP: {currentHP}");
@@ -15,7 +16,35 @@ public class Player : Killable
 
     public override void Damage(int damage)
     {
-        base.Damage(damage);
+        if (isDead) return;
+        if (Config.Singleton != null && Config.infiniteHealth == false)
+        {
+            Debug.Log("Damage taken!");
+            base.Damage(damage);
+            //player.Damage(1);
+        }
+        else
+        {
+            Debug.Log("Infinite Health On!");
+        }
+        
         PlayerHPText.SetText($"HP: {currentHP}");
+
+        if(playerAnimator != null)
+            playerAnimator.Play(_Damage);
+
+        if (currentHP <= 0)
+        {
+            Die();
+        }
+            
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        Debug.Log("Died");
+        GameOverManager.Instance.OnGameOver(GameOverState.lose);
+        CancelInvoke("Die");
     }
 }

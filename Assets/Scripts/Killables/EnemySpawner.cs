@@ -9,9 +9,10 @@ public class EnemySpawner : MonoBehaviour
     //[SerializeField] private Enemy2[] enemy2Prefabs;
     [Header("Reference Canvas")]
     [SerializeField] private RectTransform canvasRectTransform;
-    [SerializeField] private Vector2 spawnArea;
+    [SerializeField] private Vector2 spawnBorder;
+    //[SerializeField] private Vector2 spawnArea;
 
-    Crosshair crosshair;
+    [SerializeField] private Crosshair crosshair;
     Transform my_transform;
     Vector3 spawnPosition;
     // Start is called before the first frame update
@@ -31,12 +32,12 @@ public class EnemySpawner : MonoBehaviour
         {
             if (loops >= 50) { break; }
 
-            float minAreaX = canvasRectTransform.position.x - ((canvasRectTransform.rect.width / 2.0f) * canvasRectTransform.localScale.x);// + crosshair.Border.x + (spawnArea.x * crosshair.aspectRatio));
-            float maxAreaX = canvasRectTransform.position.x + ((canvasRectTransform.rect.width / 2.0f) * canvasRectTransform.localScale.x);// - crosshair.Border.x - (spawnArea.x * crosshair.aspectRatio));
-            float minAreaY = canvasRectTransform.position.y - ((canvasRectTransform.rect.height / 2.0f) * canvasRectTransform.localScale.y);// + crosshair.Border.y + (spawnArea.y * crosshair.aspectRatio));
-            float maxAreaY = canvasRectTransform.position.y + ((canvasRectTransform.rect.height / 2.0f) * canvasRectTransform.localScale.y);// - crosshair.Border.y - (spawnArea.y * crosshair.aspectRatio));
+            float minAreaX = canvasRectTransform.position.x - (((canvasRectTransform.rect.width / 2.0f) * canvasRectTransform.localScale.x) + (spawnBorder.x * Utils.CalculateAspectRatio()));
+            float maxAreaX = canvasRectTransform.position.x + (((canvasRectTransform.rect.width / 2.0f) * canvasRectTransform.localScale.x) + (spawnBorder.x * Utils.CalculateAspectRatio()));
+            float minAreaY = canvasRectTransform.position.y - (((canvasRectTransform.rect.height / 2.0f) * canvasRectTransform.localScale.y) + (spawnBorder.y * Utils.CalculateAspectRatio()));
+            float maxAreaY = canvasRectTransform.position.y + (((canvasRectTransform.rect.height / 2.0f) * canvasRectTransform.localScale.y) + (spawnBorder.y * Utils.CalculateAspectRatio()));
             float minAreaZ = 1.0f;
-            float maxAreaZ = 2.0f;
+            float maxAreaZ = 1.0f;
 
             spawnPosition.x = Random.Range(minAreaX, maxAreaX);
             spawnPosition.y = Random.Range(minAreaY, maxAreaY);
@@ -85,5 +86,27 @@ public class EnemySpawner : MonoBehaviour
         }
 
         return true;
+    }
+
+    Vector3 min = new Vector3();
+    Vector3 max = new Vector3();
+    private void OnDrawGizmos()
+    {
+        float minAreaX = canvasRectTransform.position.x - (((canvasRectTransform.rect.width / 2.0f) * canvasRectTransform.localScale.x) + (spawnBorder.x * Utils.CalculateAspectRatio()));
+        float maxAreaX = canvasRectTransform.position.x + (((canvasRectTransform.rect.width / 2.0f) * canvasRectTransform.localScale.x) + (spawnBorder.x * Utils.CalculateAspectRatio()));
+        float minAreaY = canvasRectTransform.position.y - (((canvasRectTransform.rect.height / 2.0f) * canvasRectTransform.localScale.y) + (spawnBorder.y * Utils.CalculateAspectRatio()));
+        float maxAreaY = canvasRectTransform.position.y + (((canvasRectTransform.rect.height / 2.0f) * canvasRectTransform.localScale.y) + (spawnBorder.y * Utils.CalculateAspectRatio()));
+        float minAreaZ = 1.0f;
+        float maxAreaZ = 1.0f;
+
+        min.x = minAreaX;
+        min.y = minAreaY;
+        min.z = minAreaZ;
+        max.x = maxAreaX;
+        max.y = maxAreaY;
+        max.z = maxAreaZ;
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(min, max);
     }
 }

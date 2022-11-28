@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 //public enum RockPaperScissors { rock, paper, scissors };
 
 [RequireComponent(typeof(Collider))]
 public class Enemy : Killable
 {
+    [Header("Sprite Management")]
 	[SerializeField] private Animator animator;
-    [SerializeField] private SwipeDirection swipeWeakness;
+    [SerializeField] private ParticleSystem particles;
+    [SerializeField] private Image attackTimerImage;
 
+    [Header("Enemy Data")]
+    [SerializeField] private SwipeDirection swipeWeakness;
 	[SerializeField] private float maxTime = 10.0f;
-	private float timeLeft = 10.0f;
+
+	private float timeLeft = 0.0f;
 	Player player;
     private Currency enemyCurrency;
 
@@ -24,24 +30,29 @@ public class Enemy : Killable
     
 	private void Start()
     {
-        timeLeft = 10.0f;
+        particles.gameObject.SetActive(false);
+        timeLeft = 0.0f;
         player = FindObjectOfType<Player>();
 	}
 
 	
 	private void Update()
 	{
-		if(timeLeft > 0)
+        if (isDead) return;
+
+		if(timeLeft <= maxTime)
 		{
-			timeLeft -= Time.deltaTime;
-		}
+			timeLeft += Time.deltaTime;
+        }
 		else
 		{
 			timeLeft = maxTime;
 			Attack();
 			Die();
 		}
-	}
+
+        attackTimerImage.fillAmount = timeLeft / maxTime;
+    }
 
 	public SwipeDirection SwipeWeakness
     {
@@ -51,15 +62,17 @@ public class Enemy : Killable
 	private void Attack()
 	{
         player.Damage(1);
+#if false
         if (Config.Singleton != null && Config.infiniteHealth == false)
         {
 			Debug.Log("Damage taken!");
-            player.Damage(-1);
+            player.Damage(1);
         }
 		else
         {
 			Debug.Log("Infinite Health On!");
         }
+#endif
 	}
 
     public override void Die()
@@ -81,6 +94,9 @@ public class Enemy : Killable
                 animator.Play(SWIPE_DOWN);
                 break;
 		}
+
+        particles.gameObject.SetActive(true);
+        particles.Play();
         //SpawnCurrency();
         //Destroy(gameObject);
     }

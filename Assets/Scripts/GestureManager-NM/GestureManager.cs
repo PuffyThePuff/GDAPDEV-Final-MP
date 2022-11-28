@@ -339,23 +339,27 @@ public class GestureManager : MonoBehaviour
         }
 
         Vector2 midPoint = GetMidpoint(trackedFinger1.position, trackedFinger2.position);
+#if false
         Ray r = Camera.main.ScreenPointToRay(midPoint);
         RaycastHit hit;
         GameObject hitObj = null;
         Debug.DrawRay(r.origin, r.direction * 100, Color.red, 5f);
+
         if(Physics.Raycast(r, out hit, Mathf.Infinity))
         {
             hitObj = hit.collider.gameObject;
             Debug.Log("Hit object");
         }
+#endif
 
-        SpreadEventArgs args = new SpreadEventArgs(trackedFinger1, trackedFinger2, distDelta, hitObj, SorP);
+        GameObject hitObject = Crosshair.Instance.hitObject;
+        SpreadEventArgs args = new SpreadEventArgs(trackedFinger1, trackedFinger2, distDelta, hitObject, SorP);
 
         if(OnSpread != null) OnSpread(this, args);
 
-        if(hitObj != null)
+        if(hitObject != null)
         {
-            if(hitObj.TryGetComponent<ISpreadable>(out ISpreadable spreadable))
+            if(hitObject.TryGetComponent(out ISpreadable spreadable))
             {
                 Debug.Log("Spreadable hit");
                 spreadable.OnSpread(args);
@@ -379,6 +383,7 @@ public class GestureManager : MonoBehaviour
             //Debug.Log($"Rotate CW {angle}");
             dir = RotateDirection.CW;
         }
+#if false
         GameObject hitObj = null;
         Vector2 mid = GetMidpoint(trackedFinger1.position, trackedFinger2.position);
         Ray r = Camera.main.ScreenPointToRay(mid);
@@ -388,14 +393,17 @@ public class GestureManager : MonoBehaviour
         {
             hitObj = hit.collider.gameObject;
         }
+#endif
 
-        RotateEventArgs args = new RotateEventArgs(trackedFinger1, trackedFinger2, angle, dir, hitObj);
+        GameObject hitObject = Crosshair.Instance.hitObject;
+
+        RotateEventArgs args = new RotateEventArgs(trackedFinger1, trackedFinger2, angle, dir, hitObject);
         if (OnRotate != null)
             OnRotate(this, args);
 
-        if(hitObj != null)
+        if(hitObject != null)
         {
-            if(hitObj.TryGetComponent<IRotatable>(out IRotatable rotatable))
+            if(hitObject.TryGetComponent(out IRotatable rotatable))
             {
                 rotatable.OnRotate(args);
             }

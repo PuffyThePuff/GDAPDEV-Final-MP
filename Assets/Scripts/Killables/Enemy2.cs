@@ -7,12 +7,6 @@ public class Enemy2 : Killable
 {
     [SerializeField] private SpreadOrPinch gestureWeakness;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public SpreadOrPinch GestureWeakness
     {
         get { return gestureWeakness; }
