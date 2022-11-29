@@ -11,7 +11,7 @@ public class Killable : MonoBehaviour
     protected int currentHP;
     protected bool isDead;
 
-    public void OnEnable()
+    public void Start()
     {
         currentHP = startingHP;
         isDead = false;
