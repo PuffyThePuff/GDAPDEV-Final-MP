@@ -7,6 +7,7 @@ public class EnemyShip : Killable
 {
     public override void Die()
     {
+        base.Die();
         Destroy(gameObject);
     }
 
@@ -17,7 +18,7 @@ public class EnemyShip : Killable
             //Debug.Log($"{tag} || {bullet.tagOfOrigin}");
             if (!gameObject.CompareTag(bullet.tagOfOrigin))
             {
-                Die();
+                Damage(bullet.Damage);
                 Destroy(bullet.gameObject);
             } 
         }

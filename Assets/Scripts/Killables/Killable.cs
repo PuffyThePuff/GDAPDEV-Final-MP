@@ -13,6 +13,11 @@ public class Killable : MonoBehaviour
 
     public void Start()
     {
+        initialize();
+    }
+
+    public virtual void initialize()
+    {
         currentHP = startingHP;
         isDead = false;
     }

@@ -5,7 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private float damage;
+    [SerializeField] private int damage;
+    public int Damage { get { return damage; } }
     public string tagOfOrigin { get; private set; }
 
     Transform m_Transform;
@@ -13,9 +14,13 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         m_Transform = transform;
+        if(TryGetComponent(out TrailRenderer t))
+        {
+            t.time = 1.0f / speed;
+        }
     }
 
-    public void instantiate(string tagOfOrigin)
+    public void initialize(string tagOfOrigin)
     {
         this.tagOfOrigin = tagOfOrigin;
     }
