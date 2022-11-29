@@ -12,7 +12,10 @@ public class Gun : MonoBehaviour
 
     public virtual void Fire() 
     {
-        Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
+        Bullet bul = (Bullet)Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
+
+        bul.instantiate(transform.root.tag);
+
         //Instantiate bullet (use Pooling)
         //Bullet will move itself
     }

@@ -5,13 +5,19 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float speed;
-
+    [SerializeField] private float damage;
+    public string tagOfOrigin { get; private set; }
 
     Transform m_Transform;
     // Start is called before the first frame update
     void Start()
     {
         m_Transform = transform;
+    }
+
+    public void instantiate(string tagOfOrigin)
+    {
+        this.tagOfOrigin = tagOfOrigin;
     }
 
     // Update is called once per frame
