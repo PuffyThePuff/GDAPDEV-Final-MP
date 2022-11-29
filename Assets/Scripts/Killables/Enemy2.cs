@@ -15,6 +15,6 @@ public class Enemy2 : Killable
     public override void Die()
     {
         base.Die();
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

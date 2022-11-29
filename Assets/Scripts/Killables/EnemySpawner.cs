@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+	[SerializeField] EnemyPool pool;
     [SerializeField] private Killable[] killablePrefabs;
     //[SerializeField] private Enemy[] enemyPrefabs;
     //[SerializeField] private Enemy2[] enemy2Prefabs;
@@ -50,7 +51,9 @@ public class EnemySpawner : MonoBehaviour
         
         //Enemy enemy = Instantiate(enemyPrefabs[index], my_transform.position + spawnPosition, Quaternion.identity, my_transform);
         //Enemy2 enemy2 = Instantiate(enemy2Prefabs[index2], my_transform.position + spawnPosition + new Vector3(Random.Range(-5,5), Random.Range(-5, 5), Random.Range(-5, 5)), Quaternion.identity, my_transform);
-        Killable killable = Instantiate(killablePrefabs[index], canvasRectTransform.localPosition + spawnPosition, Quaternion.identity);
+        //Killable killable = Instantiate(killablePrefabs[index], canvasRectTransform.localPosition + spawnPosition, Quaternion.identity);
+		Killable killable = pool.GetEnemyFromPool();
+		killable.transform.SetPositionAndRotation(canvasRectTransform.localPosition + spawnPosition, Quaternion.identity);
         //Debug.Log((canvasRectTransform.localPosition + spawnPosition).ToString());
         killable.gameObject.SetActive(true);
         //enemy.gameObject.SetActive(true);

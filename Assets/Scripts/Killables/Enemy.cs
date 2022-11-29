@@ -19,6 +19,9 @@ public class Enemy : Killable
     [SerializeField] private SwipeDirection swipeWeakness;
 	[SerializeField] private float maxTime = 10.0f;
 
+	public EnemyPool pool;
+
+
 	private float timeLeft = 0.0f;
 	Player player;
     private Currency enemyCurrency;
@@ -33,6 +36,7 @@ public class Enemy : Killable
         particles.gameObject.SetActive(false);
         timeLeft = 0.0f;
         player = FindObjectOfType<Player>();
+		pool = FindObjectOfType<EnemyPool>();
 	}
 
 	
@@ -97,10 +101,10 @@ public class Enemy : Killable
 
         particles.gameObject.SetActive(true);
         particles.Play();
+		pool.setUnused(this);
         //SpawnCurrency();
         //Destroy(gameObject);
     }
-
     /*
     public void SpawnCurrency()
     {
