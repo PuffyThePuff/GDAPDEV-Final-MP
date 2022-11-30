@@ -1,30 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Button fireButton;
+    //[SerializeField] private Button fireButton;
 
     PlayerShip playerShip;
-    Joystick joystick;
+    //Joystick joystick;
 
     // Start is called before the first frame update
     void Start()
     {
-        fireButton.onClick.AddListener(Fire);
+        //fireButton.onClick.AddListener(Fire);
         playerShip = GetComponent<PlayerShip>();
-        joystick = FindObjectOfType<Joystick>();
+        GestureManager.Instance.OnTap += OnTap;
+        //joystick = FindObjectOfType<Joystick>();
     }
 
     private void OnEnable()
     {
 
     }
+
     private void OnDisable()
     {
-        
+        GestureManager.Instance.OnTap -= OnTap;
     }
 
 #if false
@@ -39,8 +42,11 @@ public class PlayerController : MonoBehaviour
     }
 #endif
 
-    public void Fire()
+    public void OnTap(object sender, TapEventArgs args)
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         playerShip.gun.Fire();
     }
 }

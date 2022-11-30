@@ -59,7 +59,23 @@ public class GestureManager : MonoBehaviour
 
     void Update()
     {
-#if true
+        if (Input.touchCount > 0)
+        {
+            if (Input.touchCount == 1)
+            {
+                CheckSingleFingerGestures();
+            }
+            else if (Input.touchCount > 1)
+            {
+                CheckMultipleFingerGestures();
+            }
+        }
+        else
+        {
+            isPressed = false;
+        }
+
+#if false
         if (cHair.CrosshairState == CrosshairState.moving)
         {
             if (Input.touchCount > 1)
