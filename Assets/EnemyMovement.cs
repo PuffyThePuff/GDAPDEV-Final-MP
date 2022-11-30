@@ -41,7 +41,7 @@ public class EnemyMovement : MonoBehaviour
     private WaitForSeconds waitforSeconds;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         //Get Components
         Collider2D collider = GetComponent<Collider2D>();
@@ -57,7 +57,7 @@ public class EnemyMovement : MonoBehaviour
         //Screenbounds
         CameraHandler c = CameraHandler.instance;
         screenBounds = c.CalculateScreenToWorldView();
-        Debug.Log($"EnemyMovement: {screenBounds}");
+        //Debug.Log($"EnemyMovement: {screenBounds}");
 
         //Set Target
         if(FindObjectOfType<PlayerShip>() != null)
@@ -65,6 +65,12 @@ public class EnemyMovement : MonoBehaviour
 
         //Initialize
         OnMovementChanged();
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        CancelInvoke();
     }
 
     private void OnMovementChanged()

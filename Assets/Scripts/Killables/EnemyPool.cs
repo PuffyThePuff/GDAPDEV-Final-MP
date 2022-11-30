@@ -35,7 +35,7 @@ public class EnemyPool : MonoBehaviour
 		int index = Random.Range(0, killablePrefabs.Length);
 		Killable temp = Instantiate(killablePrefabs[index]);
 		activeEnemyList.Add(temp);
-		Debug.Log($"Created to pool {killablePrefabs[index]}");
+		//Debug.Log($"Created to pool {killablePrefabs[index]}");
 		return temp;
 	}
 

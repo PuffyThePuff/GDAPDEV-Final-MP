@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-	[SerializeField] EnemyPool pool;
+    [SerializeField] EnemyPool pool;
     [SerializeField] private Killable[] killablePrefabs;
+
+    [Header("Spawn area")]
+    [SerializeField] private Vector2 spawnArea;
+    [Range(0.0f, 1.0f)][SerializeField] private float minX = 0.0f;
+    [Range(0.0f, 1.0f)][SerializeField] private float maxX = 1.0f;
+    [Range(0.0f, 1.0f)][SerializeField] private float minY = 1.0f;
+    [Range(0.0f, 1.0f)][SerializeField] private float maxY = 1.0f;
+
+    Transform m_transform;
+    Vector2 spawnPosition = new Vector2();
+#if false
+    
     //[SerializeField] private Enemy[] enemyPrefabs;
     //[SerializeField] private Enemy2[] enemy2Prefabs;
     [Header("Reference Canvas")]
@@ -17,15 +29,16 @@ public class EnemySpawner : MonoBehaviour
     Transform my_transform;
     Vector3 spawnPosition;
     // Start is called before the first frame update
+#endif
     void Start()
     {
-        crosshair = Crosshair.Instance;
-        my_transform = transform;
+        m_transform = transform;
         InvokeRepeating("Spawn", 0.0f, 2.0f);
     }
 
     public void Spawn()
     {
+#if false
         int index = Random.Range(0, killablePrefabs.Length); //minInclusive, maxExclusive
         //int index2 = Random.Range(0, enemy2Prefabs.Length);
         int loops = 0;
@@ -58,9 +71,38 @@ public class EnemySpawner : MonoBehaviour
         killable.gameObject.SetActive(true);
         //enemy.gameObject.SetActive(true);
         //enemy2.gameObject.SetActive(true);
-        
+#endif
+
+        float x = m_transform.position.x + Random.Range(-spawnArea.x * minX, spawnArea.x * maxX);
+        float y = m_transform.position.y + Random.Range(-spawnArea.y * minY, spawnArea.y * maxY);
+
+        int indexToEdge = Random.Range(1, 5);
+        switch (indexToEdge)
+        {
+            case 1:
+                x = -spawnArea.x * minX;
+                break;
+            case 2:
+                x = spawnArea.x * maxX;
+                break;
+            case 3: 
+                y = -spawnArea.y * minY;
+                break;
+            case 4:
+                y = spawnArea.y * maxY;
+                break;
+        }
+
+        spawnPosition.x = x;
+        spawnPosition.y = y;
+
+        Killable killable = pool.GetEnemyFromPool();
+        killable.transform.SetPositionAndRotation(spawnPosition, Quaternion.identity);
+        //Debug.Log((canvasRectTransform.localPosition + spawnPosition).ToString());
+        killable.gameObject.SetActive(true);
     }
 
+#if false
     public bool CanSpawnAtPosition(Vector3 spawnPos)
     {
         //Debug.Log("Repositioning");
@@ -90,26 +132,11 @@ public class EnemySpawner : MonoBehaviour
 
         return true;
     }
+#endif
 
-    Vector3 min = new Vector3();
-    Vector3 max = new Vector3();
     private void OnDrawGizmos()
     {
-        float minAreaX = canvasRectTransform.position.x - (((canvasRectTransform.rect.width / 2.0f) * canvasRectTransform.localScale.x) + (spawnBorder.x * Utils.CalculateAspectRatio()));
-        float maxAreaX = canvasRectTransform.position.x + (((canvasRectTransform.rect.width / 2.0f) * canvasRectTransform.localScale.x) + (spawnBorder.x * Utils.CalculateAspectRatio()));
-        float minAreaY = canvasRectTransform.position.y - (((canvasRectTransform.rect.height / 2.0f) * canvasRectTransform.localScale.y) + (spawnBorder.y * Utils.CalculateAspectRatio()));
-        float maxAreaY = canvasRectTransform.position.y + (((canvasRectTransform.rect.height / 2.0f) * canvasRectTransform.localScale.y) + (spawnBorder.y * Utils.CalculateAspectRatio()));
-        float minAreaZ = 1.0f;
-        float maxAreaZ = 1.0f;
-
-        min.x = minAreaX;
-        min.y = minAreaY;
-        min.z = minAreaZ;
-        max.x = maxAreaX;
-        max.y = maxAreaY;
-        max.z = maxAreaZ;
-
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(min, max);
+        Gizmos.DrawWireCube(transform.position, spawnArea);
     }
 }

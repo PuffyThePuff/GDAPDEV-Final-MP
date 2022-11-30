@@ -14,7 +14,8 @@ public class Gun : MonoBehaviour
     {
         Bullet bul = (Bullet)Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
 
-        bul.initialize(transform.root.tag);
+
+        bul.initialize(transform.tag);
 
         //Instantiate bullet (use Pooling)
         //Bullet will move itself

@@ -8,7 +8,7 @@ public class EnemyShip : Killable
     public override void Die()
     {
         base.Die();
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

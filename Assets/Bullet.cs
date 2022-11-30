@@ -20,9 +20,11 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    public void initialize(string tagOfOrigin)
+    public void initialize(string _tag)
     {
-        this.tagOfOrigin = tagOfOrigin;
+        this.tagOfOrigin = _tag;
+        //Debug.Log(tag);
+        //this.tagOfOrigin = tagOfOrigin;
     }
 
     // Update is called once per frame
