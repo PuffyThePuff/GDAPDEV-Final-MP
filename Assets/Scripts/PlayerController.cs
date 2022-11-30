@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
+#if false
     // Update is called once per frame
     void Update()
     {
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
             movement.Move(joystick.Direction);
         }
     }
+#endif
 
     public void Fire()
     {

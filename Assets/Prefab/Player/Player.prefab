@@ -41,8 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4521905354212637315}
   - component: {fileID: 4521905354212637312}
-  - component: {fileID: 4521905354212637313}
   - component: {fileID: 4521905354212637327}
+  - component: {fileID: 1351279610286209091}
   - component: {fileID: 4521905354212637325}
   - component: {fileID: 1893845383037093098}
   m_Layer: 0
@@ -82,19 +82,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHP: 0
   maxHP: 0
---- !u!114 &4521905354212637313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4521905354212637314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df4bd037f2cce844780e9fbf65e46289, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensitivity: 10
+  healthText: {fileID: 0}
+  screenAnimator: {fileID: 0}
 --- !u!114 &4521905354212637327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +97,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireButton: {fileID: 0}
+--- !u!114 &1351279610286209091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4521905354212637314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c5d7aa51f40e34d99ce0e575de4c4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &4521905354212637325
 BoxCollider2D:
   m_ObjectHideFlags: 0

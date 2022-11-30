@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     {
         CameraHandler c = CameraHandler.instance;
         screenBounds = c.CalculateScreenToWorldView();
-        Debug.Log($"PlayerMovement: {screenBounds}");
+        //Debug.Log($"PlayerMovement: {screenBounds}");
 
         Collider2D collider = GetComponent<Collider2D>();
         spriteBounds.x = collider.bounds.extents.x;
