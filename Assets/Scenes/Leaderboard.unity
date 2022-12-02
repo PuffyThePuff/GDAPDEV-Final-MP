@@ -236,6 +236,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d876f39791411241a0137306f039345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groupNumber: 16
+  groupName: TEST GROUP
+  gameName: TEST GAME
+  secret: pass
 --- !u!4 &376254001
 Transform:
   m_ObjectHideFlags: 0
