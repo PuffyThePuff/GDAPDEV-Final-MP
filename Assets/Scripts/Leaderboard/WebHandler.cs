@@ -19,11 +19,42 @@ public class WebHandler : MonoBehaviour
     [SerializeField] private string gameName = "Handy Manny";
     [SerializeField] private string secret = "supersecretpassword";
 
+    #region singleton code
+    //Miguel's really cool singleton code he made in 2020 and probably still works
+    //put Singleton = this in Awake()
+    private static WebHandler _singleton;
+
+    //getter and setter for singleton
+    public static WebHandler Singleton
+    {
+        get => _singleton;
+
+        private set
+        {
+            if (_singleton == null)
+            {
+                _singleton = value;
+            }
+            else if (_singleton != value)
+            {
+                Debug.Log($"{nameof(WebHandler)} instance already exists, destroying duplicate");
+                Destroy(value);
+            }
+        }
+    }
+    #endregion
+
+    private void Awake()
+    {
+        Singleton = this;
+    }
+
     private void Start()
     {
         //CreateGroup();
         //GetPlayerScores();
         //SendPlayerScore("BOBBERT", 9999);
+        //ResetPlayerScores(secret);
     }
 
     #region Group creation
@@ -100,6 +131,8 @@ public class WebHandler : MonoBehaviour
                 foreach(Dictionary<string, string> player in scoreList)
                 {
                     Debug.Log($"got player: {player["user_name"]} : {player["score"]}");
+
+                    LeaderboardManager.Singleton.AddToLeaderboard($"got player: {player["user_name"]} : {player["score"]}");
                 }
             }
             else
@@ -131,6 +164,51 @@ public class WebHandler : MonoBehaviour
 
         //create POST request directed to /groups route
         using (UnityWebRequest request = new UnityWebRequest(BaseURL + "scores", "POST"))
+        {
+            //send what data type is in the request
+            request.SetRequestHeader("Content-Type", "application/JSON");
+            //add request data
+            request.uploadHandler = new UploadHandlerRaw(requestData);
+            //create reciever for response
+            request.downloadHandler = new DownloadHandlerBuffer();
+
+            yield return request.SendWebRequest();
+
+            Debug.Log($"response code: {request.responseCode}");
+
+            //check if no error
+            if (string.IsNullOrEmpty(request.error))
+            {
+                Debug.Log($"message: {request.downloadHandler.text}");
+            }
+            else
+            {
+                Debug.Log($"error: {request.error}");
+            }
+        }
+    }
+    #endregion
+
+    #region Reset scores in group
+    public void ResetPlayerScores(string password)
+    {
+        StartCoroutine(DeletePlayerScoresRequest(password));
+    }
+
+    IEnumerator DeletePlayerScoresRequest(string password)
+    {
+        Dictionary<string, object> deleteScoresParams = new Dictionary<string, object>();
+
+        deleteScoresParams.Add("group_num", 1);
+        deleteScoresParams.Add("secret", password);
+
+        //turns the dictionary into a JSON string
+        string requestString = JsonConvert.SerializeObject(deleteScoresParams);
+        //convert string into bytes
+        byte[] requestData = Encoding.UTF8.GetBytes(requestString);
+
+        //create POST request directed to /groups route
+        using (UnityWebRequest request = new UnityWebRequest(BaseURL + "scores", "DELETE"))
         {
             //send what data type is in the request
             request.SetRequestHeader("Content-Type", "application/JSON");
