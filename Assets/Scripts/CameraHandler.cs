@@ -38,4 +38,9 @@ public class CameraHandler : MonoBehaviour
         //Debug.Log(Camera.ScreenToWorldPoint(position));
         return Camera.ScreenToWorldPoint(position);
     }
+
+    public float AspectRatio()
+    {
+        return Camera.aspect;
+    }
 }

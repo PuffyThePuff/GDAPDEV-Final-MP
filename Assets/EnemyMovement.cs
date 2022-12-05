@@ -136,7 +136,7 @@ public class EnemyMovement : MonoBehaviour
 
     IEnumerator Move()
     {
-        Debug.Log("Moving");
+        //Debug.Log("Moving");
         while (gameObject.activeInHierarchy)
         {
             if (Vector3.Distance(m_transform.position, destination) <= 0.1f)

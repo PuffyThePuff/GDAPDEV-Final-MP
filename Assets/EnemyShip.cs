@@ -1,10 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyShip : Killable
 {
+    [SerializeField] private AudioClip hurt;
+
+    public override void Damage(int damage)
+    {
+        base.Damage(damage);
+        AudioManager.Instance.PlaySFX(hurt);
+    }
     public override void Die()
     {
         base.Die();

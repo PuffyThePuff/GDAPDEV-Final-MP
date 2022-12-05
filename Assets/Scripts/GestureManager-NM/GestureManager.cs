@@ -197,7 +197,7 @@ public class GestureManager : MonoBehaviour
 
     protected void FireTapEvent(Vector2 pos)
     {
-        Debug.Log("Tap!");
+        //Debug.Log("Tap!");
         GameObject hitObject = null;// = Crosshair.Instance.hitObject;
 #if true
         Ray r = Camera.main.ScreenPointToRay(pos);

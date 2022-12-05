@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -9,11 +10,18 @@ public class EnemySpawner : MonoBehaviour
 
     [Header("Spawn area")]
     [SerializeField] private Vector2 spawnArea;
+    [SerializeField] private bool onlyEdge;
+    //[SerializeField] private bool canSpawnAtNegativeX;
+    //[SerializeField] private bool canSpawnAtPositiveX;
+    //[SerializeField] private bool canSpawnAtnegativeY;
+    //[SerializeField] private bool canSpawnAtPositiveY;
+    //[SerializeField] private bool spawnOffScreen;
     [Range(0.0f, 1.0f)][SerializeField] private float minX = 0.0f;
     [Range(0.0f, 1.0f)][SerializeField] private float maxX = 1.0f;
     [Range(0.0f, 1.0f)][SerializeField] private float minY = 1.0f;
     [Range(0.0f, 1.0f)][SerializeField] private float maxY = 1.0f;
 
+    CameraHandler camHandler;
     Transform m_transform;
     Vector2 spawnPosition = new Vector2();
 #if false
@@ -33,6 +41,8 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         m_transform = transform;
+        camHandler = CameraHandler.instance;
+
         InvokeRepeating("Spawn", 0.0f, 2.0f);
     }
 
@@ -72,25 +82,32 @@ public class EnemySpawner : MonoBehaviour
         //enemy.gameObject.SetActive(true);
         //enemy2.gameObject.SetActive(true);
 #endif
+        float aspectRatio = camHandler.AspectRatio();
+        float x = m_transform.position.x + Random.Range(-spawnArea.x * minX * aspectRatio, spawnArea.x * maxX * aspectRatio);
+        float y = m_transform.position.y + Random.Range(-spawnArea.y * minY * aspectRatio , spawnArea.y * maxY * aspectRatio);
 
-        float x = m_transform.position.x + Random.Range(-spawnArea.x * minX, spawnArea.x * maxX);
-        float y = m_transform.position.y + Random.Range(-spawnArea.y * minY, spawnArea.y * maxY);
 
-        int indexToEdge = Random.Range(1, 5);
-        switch (indexToEdge)
+        if (onlyEdge)
         {
-            case 1:
-                x = -spawnArea.x * minX;
-                break;
-            case 2:
-                x = spawnArea.x * maxX;
-                break;
-            case 3: 
-                y = -spawnArea.y * minY;
-                break;
-            case 4:
-                y = spawnArea.y * maxY;
-                break;
+            int indexToEdge = Random.Range(1, 3);
+            Debug.Log($"{indexToEdge} || ({x}, {y})");
+            switch (indexToEdge)
+            {
+                case 1:
+                    x = -spawnArea.x * minX * aspectRatio;
+                    break;
+                case 2:
+                    x = spawnArea.x * maxX * aspectRatio;
+                    break;
+                case 3:
+                    y = spawnArea.y * maxY * aspectRatio;
+                    break;
+#if false
+                case 4:
+                    y = -spawnArea.y * minY * aspectRatio;
+                    break;
+#endif
+            }
         }
 
         spawnPosition.x = x;
@@ -137,6 +154,7 @@ public class EnemySpawner : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position, spawnArea);
+        float aspect = Camera.main.aspect;
+        Gizmos.DrawWireCube(transform.position, spawnArea * aspect);
     }
 }

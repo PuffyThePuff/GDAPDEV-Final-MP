@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHP: 0
   maxHP: 0
+  hurt: {fileID: 8300000, guid: 01fe8e10a633e964b8ec578866963a1e, type: 3}
 --- !u!114 &4564720377231653785
 MonoBehaviour:
   m_ObjectHideFlags: 0
