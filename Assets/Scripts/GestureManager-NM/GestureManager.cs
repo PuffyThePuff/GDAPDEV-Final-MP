@@ -58,7 +58,7 @@ public class GestureManager : MonoBehaviour
     {
         cHair = Crosshair.Instance;
 
-        playerObject = GameObject.FindGameObjectWithTag("player").gameObject;
+        playerObject = GameObject.FindGameObjectWithTag("Player").gameObject;
     }
 
     void Update()

@@ -49,7 +49,7 @@ public class Gun : MonoBehaviour
                     bul.initialize("scissor");
                     bul.GetComponent<SpriteRenderer>().color = Color.red;
                     bul.GetComponent<LineRenderer>().startColor = Color.red;
-                    this.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.white;
+                    this.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.red;
                     break;
             }
         }
