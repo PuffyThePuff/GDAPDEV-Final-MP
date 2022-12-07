@@ -47,6 +47,8 @@ public class GestureManager : MonoBehaviour
 
     private Crosshair cHair;
 
+    private GameObject playerObject;
+
     private void Awake()
     {
         InitializeSingleton();
@@ -55,6 +57,8 @@ public class GestureManager : MonoBehaviour
     private void Start()
     {
         cHair = Crosshair.Instance;
+
+        playerObject = GameObject.FindGameObjectWithTag("player").gameObject;
     }
 
     void Update()
@@ -244,6 +248,8 @@ public class GestureManager : MonoBehaviour
                 //Debug.Log("Left");
                 swipeDir = SwipeDirection.LEFT;
             }
+            
+            playerObject.GetComponent<Gun>().changeGun(swipeDir);
         }
         else //Verticle Swipe
         {
