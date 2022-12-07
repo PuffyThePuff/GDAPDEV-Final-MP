@@ -3,63 +3,108 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 //public enum RockPaperScissors { rock, paper, scissors };
 
 [RequireComponent(typeof(Collider))]
 public class Enemy : Killable
 {
+    [Header("Sprite Management")]
+	[SerializeField] private Animator animator;
+    [SerializeField] private ParticleSystem particles;
+    [SerializeField] private Image attackTimerImage;
+
+    [Header("Enemy Data")]
     [SerializeField] private SwipeDirection swipeWeakness;
-
 	[SerializeField] private float maxTime = 10.0f;
-	private float timeLeft = 10.0f;
-	GameObject gameManager;
-    private Currency enemyCurrency;
-	
 
-    private void Start()
+	public EnemyPool pool;
+
+
+	private float timeLeft = 0.0f;
+	Player player;
+    private Currency enemyCurrency;
+
+	private static readonly int SWIPE_UP = Animator.StringToHash("Swipe_UP");
+    private static readonly int SWIPE_DOWN = Animator.StringToHash("Swipe_DOWN");
+    private static readonly int SWIPE_LEFT = Animator.StringToHash("Swipe_LEFT");
+    private static readonly int SWIPE_RIGHT = Animator.StringToHash("Swipe_RIGHT");
+    
+	private void Start()
     {
-		gameManager = GameObject.FindGameObjectWithTag("GameController");
+        particles.gameObject.SetActive(false);
+        timeLeft = 0.0f;
+        player = FindObjectOfType<Player>();
+		pool = FindObjectOfType<EnemyPool>();
 	}
-	private void FixedUpdate()
+
+	
+	private void Update()
 	{
-		if(timeLeft > 0)
+        if (isDead) return;
+
+		if(timeLeft <= maxTime)
 		{
-			timeLeft -= Time.deltaTime;
-		}
+			timeLeft += Time.deltaTime;
+        }
 		else
 		{
 			timeLeft = maxTime;
-			inflictDmg();
+			Attack();
 			Die();
 		}
-	}
+
+        attackTimerImage.fillAmount = timeLeft / maxTime;
+    }
 
 	public SwipeDirection SwipeWeakness
     {
         get { return swipeWeakness; }
     }
 
-	private void inflictDmg()
+	private void Attack()
 	{
-		if (Config.Singleton != null && Config.infiniteHealth == false)
+        player.Damage(1);
+#if false
+        if (Config.Singleton != null && Config.infiniteHealth == false)
         {
 			Debug.Log("Damage taken!");
-			gameManager.GetComponent<Player>().updateHpValue(-1);
+            player.Damage(1);
         }
 		else
         {
 			Debug.Log("Infinite Health On!");
         }
+#endif
 	}
 
     public override void Die()
     {
         base.Die();
-        //SpawnCurrency();
-        Destroy(gameObject);
-    }
 
+		switch (swipeWeakness)
+		{
+			case SwipeDirection.RIGHT:
+				animator.Play(SWIPE_RIGHT);
+				break;
+			case SwipeDirection.LEFT:
+                animator.Play(SWIPE_LEFT);
+                break;
+			case SwipeDirection.UP:
+                animator.Play(SWIPE_UP);
+                break;
+			case SwipeDirection.DOWN:
+                animator.Play(SWIPE_DOWN);
+                break;
+		}
+
+        particles.gameObject.SetActive(true);
+        particles.Play();
+		pool.setUnused(this);
+        //SpawnCurrency();
+        //Destroy(gameObject);
+    }
     /*
     public void SpawnCurrency()
     {

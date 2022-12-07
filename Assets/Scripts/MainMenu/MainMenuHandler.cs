@@ -9,7 +9,7 @@ public class MainMenuHandler : MonoBehaviour
     public void OnPlayPressed()
     {
         Debug.Log("Entering Game");
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(1);
     }
 
     public void OnQuitPressed()

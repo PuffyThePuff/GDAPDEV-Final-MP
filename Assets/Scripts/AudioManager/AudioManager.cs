@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
@@ -22,7 +23,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource ambienceSource;
     [SerializeField] private AudioSource sfxSource;
 
-    public void PlayMusicLoop(AudioClip clip, float volume)
+    public void PlayMusicLoop(AudioClip clip)
     {
         if(clip == null) return;
 
@@ -31,7 +32,7 @@ public class AudioManager : MonoBehaviour
         musicSource.Play();
     }
 
-    public void PlayAmbienceLoop(AudioClip clip, float volume)
+    public void PlayAmbienceLoop(AudioClip clip)
     {
         if (clip == null) return;
 
@@ -40,7 +41,7 @@ public class AudioManager : MonoBehaviour
         ambienceSource.Play();
     }
 
-    public void PlaySFX(AudioClip clip, float volume)
+    public void PlaySFX(AudioClip clip)
     {
         if (clip == null) return;
 

@@ -19,23 +19,22 @@ public class Crosshair : MonoBehaviour
     [SerializeField] private float sensitivity = 10.0f;
     [SerializeField] private Vector2 border;
     [Range(1.0f, 1000.0f)][SerializeField] private float range;
-    //[Range(0.1f, 3.0f)][SerializeField] private float radius;
-    //[Range(0.1f, 10.0f)][SerializeField] private float scale;
-    //[SerializeField] bool wideAim;
+    [Range(0.1f, 3.0f)][SerializeField] private float radius;
+    [Range(0.1f, 10.0f)][SerializeField] private float scale;
+    [SerializeField] bool wideAim;
 
     [Header("Manually Set if automatic is not working")]
     [SerializeField] RectTransform crossHairRectTransform;
+    [SerializeField] RectTransform _canvasRectTransform;
     [SerializeField] Joystick joystick;
-
-    //Canvas
-    RectTransform _canvasRectTransform;
 
     //Temp values
     private Vector2 _position = new Vector2();
     private Vector2 _border = new Vector2();
-    public Vector2 Border { get { return border; } }
+    public Vector2 Border { get { return _border; } }
 
-    //private Vector2 scaleVector = new Vector2();
+    //public float aspectRatio { get; private set; } = 1.0f;
+    private Vector2 scaleVector = new Vector2();
 
     //private List<GameObject> hitObjects = new List<GameObject>();
     public GameObject hitObject { get; private set; } = null;
@@ -49,10 +48,11 @@ public class Crosshair : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        //scaleVector.x = scale; scaleVector.y = scale;
-        //crossHairRectTransform.localScale = scaleVector;
+        //aspectRatio = (float)Screen.width / Screen.height;
+        scaleVector.x = scale; scaleVector.y = scale;
+        crossHairRectTransform.localScale = scaleVector;
         Move();
         CastRay();
     }
@@ -82,7 +82,6 @@ public class Crosshair : MonoBehaviour
             Debug.Log(hitObject);
         }
 #endif
-
         RaycastHit hit;
         if (Physics.Raycast(crossHairRectTransform.position, Vector3.forward, out hit, range))
         {
@@ -100,10 +99,10 @@ public class Crosshair : MonoBehaviour
         if (joystick.Direction.x != 0.0f || joystick.Direction.y != 0.0f)
         {
             CrosshairState = CrosshairState.moving;
-            float aspectRatio = Utils.AspectRatio();
+            float aspectRatio = Utils.CalculateAspectRatio();
             //Debug.Log(_canvasRectTransform.rect);
-            #region Set the borders based on orientation
-            //Debug.Log(Utils.AspectRatio());
+#region Set the borders based on orientation
+            //Debug.Log(aspectRatio);
 #if true
             if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeRight)
             {
@@ -121,8 +120,8 @@ public class Crosshair : MonoBehaviour
 #endregion
             //----------------------
 #region Set coordinates for the crosshair position
-            float x = (joystick.Direction.x * sensitivity * Time.fixedDeltaTime) + crossHairRectTransform.localPosition.x;
-            float y = (joystick.Direction.y * sensitivity * Time.fixedDeltaTime) + crossHairRectTransform.localPosition.y;
+            float x = (joystick.Direction.x * sensitivity * Time.deltaTime) + crossHairRectTransform.localPosition.x;
+            float y = (joystick.Direction.y * sensitivity * Time.deltaTime) + crossHairRectTransform.localPosition.y;
 #endregion
             //----------------------
 #region Clamp direction to Screen
@@ -146,4 +145,30 @@ public class Crosshair : MonoBehaviour
             CrosshairState = CrosshairState.stopped;
         }
     }
+
+    /*
+    Vector3 min = new Vector3();
+    Vector3 max = new Vector3();
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        //Gizmos.DrawLine(crossHairRectTransform.position, Vector3.forward * range);
+        Gizmos.DrawWireSphere(crossHairRectTransform.position, radius * Utils.CalculateAspectRatio() * scale);
+
+        float minX = (_canvasRectTransform.rect.width) + (crossHairRectTransform.rect.width / 2.0f) + _border.x;
+        float maxX = (_canvasRectTransform.rect.width) - (crossHairRectTransform.rect.width / 2.0f) - _border.x;
+        float minY = (_canvasRectTransform.rect.height) +(crossHairRectTransform.rect.height / 2.0f) + _border.y;
+        float maxY = (_canvasRectTransform.rect.height) - (crossHairRectTransform.rect.height / 2.0f) - _border.y;
+
+        min.x = minX;
+        min.y = minY;
+        min.z = 0.0f;
+        
+        max.x = maxX;
+        max.y = maxY;
+        max.z = 0.0f;
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(min, max);
+    }*/
 }

@@ -17,17 +17,15 @@ public class EnemyManager : MonoBehaviour
         GestureManager.Instance.OnSpread -= OnSpread;
     }
 
-
-
     public void OnSwipe(object sender, SwipeEventArgs args)
     {
         if (args.HitObject != null)
         {
-            if(args.HitObject.TryGetComponent<Enemy>(out Enemy enemy))
+            if(args.HitObject.TryGetComponent(out Enemy enemy))
             {
                 if (args.SwipeDirection == enemy.SwipeWeakness)
                 {
-                    AudioManager.Instance.PlaySFX(slapSFX, 1);
+                    AudioManager.Instance.PlaySFX(slapSFX);
                     enemy.Die();
                 }
             }
@@ -39,11 +37,11 @@ public class EnemyManager : MonoBehaviour
     {
         if (args.HitObject != null)
         {
-            if (args.HitObject.TryGetComponent<Enemy2>(out Enemy2 enemy2))
+            if (args.HitObject.TryGetComponent(out Enemy2 enemy2))
             {
                 if (args.SpreadOrPinch == enemy2.GestureWeakness)
                 {
-                    AudioManager.Instance.PlaySFX(slapSFX, 1);
+                    AudioManager.Instance.PlaySFX(slapSFX);
                     enemy2.Die();
                 }
             }
