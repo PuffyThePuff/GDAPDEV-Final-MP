@@ -14,6 +14,11 @@ public class Gun : MonoBehaviour
 
     private GunType currentGunType = 0;
 
+    private void Start()
+    {
+        this.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.gray;
+    }
+
     public virtual void Fire() 
     {
         Bullet bul = (Bullet)Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
