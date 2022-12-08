@@ -14,9 +14,10 @@ public class EnemyShip : Killable
     {
         base.Die();
         RandomizeType();
-        gameObject.SetActive(false);
+        PlayerDataManager.instance.PlayerCurrency += 1;
+        ScoreManager.Singleton.addScore(1);
 
-		PlayerDataManager.instance.PlayerCurrency += 1;
+        gameObject.SetActive(false);
     }
 
 	private void OnTriggerEnter2D(Collider2D collision)
