@@ -20,4 +20,14 @@ public class Gun : MonoBehaviour
         //Instantiate bullet (use Pooling)
         //Bullet will move itself
     }
+
+    public virtual void SpecialFire()
+    {
+        
+    }
+
+    public virtual void SpecialFire2()
+    {
+
+    }
 }
