@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 377090684887245453, guid: 987179b02b3603647af9f85ea8b9b4a7, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 377090684887245453, guid: 987179b02b3603647af9f85ea8b9b4a7, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 653968375407242968, guid: 987179b02b3603647af9f85ea8b9b4a7, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -71,6 +79,10 @@ PrefabInstance:
     - target: {fileID: 653968375407242971, guid: 987179b02b3603647af9f85ea8b9b4a7, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711398684218229488, guid: 987179b02b3603647af9f85ea8b9b4a7, type: 3}
+      propertyPath: m_Color.b
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

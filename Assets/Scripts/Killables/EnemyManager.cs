@@ -25,7 +25,7 @@ public class EnemyManager : MonoBehaviour
             {
                 if (args.SwipeDirection == enemy.SwipeWeakness)
                 {
-                    AudioManager.Instance.PlaySFX(slapSFX, 1);
+                    AudioManager.Instance.PlaySFX(slapSFX);
                     enemy.Die();
                 }
             }
@@ -41,7 +41,7 @@ public class EnemyManager : MonoBehaviour
             {
                 if (args.SpreadOrPinch == enemy2.GestureWeakness)
                 {
-                    AudioManager.Instance.PlaySFX(slapSFX, 1);
+                    AudioManager.Instance.PlaySFX(slapSFX);
                     enemy2.Die();
                 }
             }
