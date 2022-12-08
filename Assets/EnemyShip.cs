@@ -9,9 +9,11 @@ public class EnemyShip : Killable
     {
         base.Die();
         gameObject.SetActive(false);
+
+		PlayerDataManager.instance.PlayerCurrency += 1;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+	private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out Bullet bullet))
         {
