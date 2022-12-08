@@ -14,7 +14,7 @@ public class ShopManager : MonoBehaviour
 	[SerializeField] Button BulletDamageUpgradeButton;
 
 	[SerializeField] Button HealthUpgradeButton;
-	[SerializeField] Button UpgradableUpgradeButton;
+	[SerializeField] Button Stat4UpgradePrice;
 
 	[SerializeField] Button Power1UpgradeButton;
 	[SerializeField] Button Power2UpgradeButton;
@@ -34,28 +34,26 @@ public class ShopManager : MonoBehaviour
 	[SerializeField] float BulletDamagePrice;
 
 	[SerializeField] float HealthPrice;
-	[SerializeField] float UpgradablePrice;
+	[SerializeField] float Stat4Price;
 
 	[SerializeField] float Power1Price;
 	[SerializeField] float Power2Price;
 
-	float player_money;
-
 	private void Update()
 	{
-		playerMoneyText.text = $"Money : {player_money}";
+		playerMoneyText.text = $"Money : {PlayerDataManager.instance.PlayerCurrency}";
 
 		FireRatePriceText.text = $"{FireRatePrice} Currency";
 		BulletDamagePriceText.text = $"{BulletDamagePrice} Currency";
 		HealthPriceText.text = $"{HealthPrice} Currency";
-		UpgradablePriceText.text = $"{UpgradablePrice} Currency";
+		UpgradablePriceText.text = $"{Stat4Price} Currency";
 		Power1PriceText.text = $"{Power1Price} Currency";
 		Power2PriceText.text = $"{Power2Price} Currency";
 
-		if(player_money > 0)
+		if(PlayerDataManager.instance.PlayerCurrency > 0)
 		{
 
-			if(player_money < FireRatePrice)
+			if(PlayerDataManager.instance.PlayerCurrency < FireRatePrice)
 			{
 				FireRateUpgradeButton.interactable = false;
 			}
@@ -64,7 +62,7 @@ public class ShopManager : MonoBehaviour
 				FireRateUpgradeButton.interactable = true;
 			}
 
-			if (player_money < BulletDamagePrice)
+			if (PlayerDataManager.instance.PlayerCurrency < BulletDamagePrice)
 			{
 				BulletDamageUpgradeButton.interactable = false;
 			}
@@ -73,7 +71,7 @@ public class ShopManager : MonoBehaviour
 				BulletDamageUpgradeButton.interactable = true;
 			}
 
-			if(player_money < HealthPrice)
+			if(PlayerDataManager.instance.PlayerCurrency < HealthPrice)
 			{
 				HealthUpgradeButton.interactable = false;
 			}
@@ -82,16 +80,16 @@ public class ShopManager : MonoBehaviour
 				HealthUpgradeButton.interactable = true;
 			}
 
-			if(player_money < UpgradablePrice)
+			if(PlayerDataManager.instance.PlayerCurrency < Stat4Price)
 			{
-				UpgradableUpgradeButton.interactable = false;
+				Stat4UpgradePrice.interactable = false;
 			}
 			else
 			{
-				UpgradableUpgradeButton.interactable = true;
+				Stat4UpgradePrice.interactable = true;
 			}
 
-			if(player_money < Power1Price)
+			if(PlayerDataManager.instance.PlayerCurrency < Power1Price)
 			{
 				Power1UpgradeButton.interactable = false;
 			}
@@ -100,7 +98,7 @@ public class ShopManager : MonoBehaviour
 				Power1UpgradeButton.interactable = true;
 			}
 
-			if(player_money < Power2Price)
+			if(PlayerDataManager.instance.PlayerCurrency < Power2Price)
 			{
 				Power2UpgradeButton.interactable = false;
 			}
@@ -115,7 +113,7 @@ public class ShopManager : MonoBehaviour
 			 BulletDamageUpgradeButton.interactable = false;
 
 			 HealthUpgradeButton.interactable = false;
-			 UpgradableUpgradeButton.interactable = false;
+			 Stat4UpgradePrice.interactable = false;
 
 			 Power1UpgradeButton.interactable = false;
 			 Power2UpgradeButton.interactable = false;
@@ -124,31 +122,36 @@ public class ShopManager : MonoBehaviour
 
 	public void UpgradeFireRate()
 	{
-
+		PlayerDataManager.instance.PlayerCurrency -= (int)FireRatePrice;
 	}
 
 	public void UpgradeDamage()
 	{
+		PlayerDataManager.instance.PlayerCurrency -= (int)BulletDamagePrice;
 
 	}
 
 	public void UpgradeHealth()
 	{
+		PlayerDataManager.instance.PlayerCurrency -= (int)HealthPrice;
 
 	}
 
 	public void UpgradeStat4()
 	{
+		PlayerDataManager.instance.PlayerCurrency -= (int)Stat4Price;
 
 	}
 
 	public void BuyPower1()
 	{
+		PlayerDataManager.instance.PlayerCurrency -= (int)Power1Price;
 
 	}
 
 	public void BuyPower2()
 	{
+		PlayerDataManager.instance.PlayerCurrency -= (int)Power2Price;
 
 	}
 }
