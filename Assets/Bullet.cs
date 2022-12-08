@@ -22,7 +22,7 @@ public class Bullet : MonoBehaviour
 
     public void initialize(string _tag)
     {
-        this.tagOfOrigin = _tag;
+        this.tag = _tag;
         //Debug.Log(tag);
         //this.tagOfOrigin = tagOfOrigin;
     }

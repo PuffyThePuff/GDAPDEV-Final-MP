@@ -16,7 +16,7 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
-        this.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.gray;
+        
     }
 
     public virtual void Fire() 
@@ -26,7 +26,7 @@ public class Gun : MonoBehaviour
         //check if attached to player to not add bullet type
         if (transform.tag != "Player")
         {
-            bul.initialize(transform.tag);
+            bul.initialize("Enemy");
         }
         else
         {

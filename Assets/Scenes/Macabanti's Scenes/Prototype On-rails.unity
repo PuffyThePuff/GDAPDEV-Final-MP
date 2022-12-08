@@ -1237,7 +1237,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 99.8
+  m_fontSize: 101.45
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2496,7 +2496,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 99.8
+  m_fontSize: 101.45
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2757,7 +2757,9 @@ MonoBehaviour:
   activeEnemyList: []
   deactiveEnemyList: []
   killablePrefabs:
-  - {fileID: 4564720377231653767, guid: dbdfe073e4897ee42a190b8203fbc332, type: 3}
+  - {fileID: 4564720377231653767, guid: 020b21b1130e27841b1bed8f68239c75, type: 3}
+  - {fileID: 4564720377231653767, guid: bf8a2734f2c3ec14399665fe5dbac7c4, type: 3}
+  - {fileID: 4564720377231653767, guid: 40998bef76142324a8b75d417b76d2e7, type: 3}
 --- !u!1 &1245358630
 GameObject:
   m_ObjectHideFlags: 0
@@ -4479,7 +4481,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 99.8
+  m_fontSize: 101.45
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1

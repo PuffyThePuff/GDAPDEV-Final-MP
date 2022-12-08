@@ -71,7 +71,7 @@ public class PlayerShip : Killable
         if (collision.TryGetComponent(out Bullet bullet))
         {
             //Debug.Log($"{tag} || {bullet.tagOfOrigin}");
-            if (gameObject.tag != bullet.tagOfOrigin)
+            if (bullet.tag == "Enemy")
             {
                 Damage(bullet.Damage);
                 Destroy(bullet.gameObject);
