@@ -46,6 +46,9 @@ public class GestureManager : MonoBehaviour
     public bool isPressed = false;
 
     private Crosshair cHair;
+
+    private GameObject playerObject;
+
     private void Awake()
     {
         InitializeSingleton();
@@ -54,6 +57,8 @@ public class GestureManager : MonoBehaviour
     private void Start()
     {
         cHair = Crosshair.Instance;
+
+        playerObject = GameObject.FindGameObjectWithTag("Player").gameObject;
     }
 
     void Update()
@@ -196,7 +201,7 @@ public class GestureManager : MonoBehaviour
 
     protected void FireTapEvent(Vector2 pos)
     {
-        //Debug.Log("Tap!");
+        Debug.Log("Tap!");
         GameObject hitObject = null;// = Crosshair.Instance.hitObject;
 #if true
         Ray r = Camera.main.ScreenPointToRay(pos);
@@ -243,6 +248,8 @@ public class GestureManager : MonoBehaviour
                 //Debug.Log("Left");
                 swipeDir = SwipeDirection.LEFT;
             }
+            
+            playerObject.GetComponent<Gun>().changeGun(swipeDir);
         }
         else //Verticle Swipe
         {
