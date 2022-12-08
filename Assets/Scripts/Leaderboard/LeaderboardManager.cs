@@ -42,6 +42,8 @@ public class LeaderboardManager : MonoBehaviour
 
     private void Start()
     {
+        WebHandler.Singleton.SendPlayerScore(ScoreManager.Singleton.userName, ScoreManager.Singleton.score);
+        ScoreManager.Singleton.resetData();
         WebHandler.Singleton.GetPlayerScores();
     }
 

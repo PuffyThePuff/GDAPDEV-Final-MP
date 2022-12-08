@@ -146,7 +146,10 @@ public class WebHandler : MonoBehaviour
     #region Send player score to group
     public void SendPlayerScore(string userName, int score)
     {
-        StartCoroutine(PostPlayerScoreRequest(userName, score));
+        if (userName != "")
+        {
+            StartCoroutine(PostPlayerScoreRequest(userName, score));
+        }
     }
 
     IEnumerator PostPlayerScoreRequest(string name, int score)
