@@ -30,25 +30,24 @@ public class Gun : MonoBehaviour
         }
         else
         {
-            //could probably make this cleaner but I'm lazy and hungry - Miguel
             switch (currentGunType)
             {
                 case GunType.rock:
                     bul.initialize("rock");
                     bul.GetComponent<SpriteRenderer>().color = Color.gray;
-                    bul.GetComponent<LineRenderer>().startColor = Color.gray;
+                    bul.GetComponent<TrailRenderer>().startColor = Color.gray;
                     this.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.gray;
                     break;
                 case GunType.paper:
                     bul.initialize("paper");
                     bul.GetComponent<SpriteRenderer>().color = Color.white;
-                    bul.GetComponent<LineRenderer>().startColor = Color.white;
+                    bul.GetComponent<TrailRenderer>().startColor = Color.white;
                     this.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.white;
                     break;
                 default:
                     bul.initialize("scissor");
                     bul.GetComponent<SpriteRenderer>().color = Color.red;
-                    bul.GetComponent<LineRenderer>().startColor = Color.red;
+                    bul.GetComponent<TrailRenderer>().startColor = Color.red;
                     this.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.red;
                     break;
             }
@@ -70,5 +69,6 @@ public class Gun : MonoBehaviour
             currentGunType--;
             if (currentGunType < GunType.rock){currentGunType = GunType.scissor;}
         }
+        Debug.Log("switch to: " + currentGunType);
     }
 }

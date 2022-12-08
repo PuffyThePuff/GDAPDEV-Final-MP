@@ -273,6 +273,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134039967}
   m_CullTransparentMesh: 1
+--- !u!1 &141058023 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4521905355532132524, guid: 964e163b7f6209e49a2c119f42d3e5f2, type: 3}
+  m_PrefabInstance: {fileID: 4521905355136543430}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &171055318
 GameObject:
   m_ObjectHideFlags: 0
@@ -1420,6 +1425,7 @@ MonoBehaviour:
     minDistance: 0.75
     minChange: 0.4
   isPressed: 0
+  playerObject: {fileID: 141058023}
 --- !u!4 &378514081
 Transform:
   m_ObjectHideFlags: 0

@@ -47,7 +47,7 @@ public class GestureManager : MonoBehaviour
 
     private Crosshair cHair;
 
-    private GameObject playerObject;
+    [SerializeField] private GameObject playerObject;
 
     private void Awake()
     {
@@ -57,8 +57,6 @@ public class GestureManager : MonoBehaviour
     private void Start()
     {
         cHair = Crosshair.Instance;
-
-        playerObject = GameObject.FindGameObjectWithTag("Player").gameObject;
     }
 
     void Update()
@@ -240,12 +238,12 @@ public class GestureManager : MonoBehaviour
         {
             if(direction.x > 0)
             {
-                //Debug.Log("Right");
+                Debug.Log("Right");
                 swipeDir = SwipeDirection.RIGHT;
             }
             else
             {
-                //Debug.Log("Left");
+                Debug.Log("Left");
                 swipeDir = SwipeDirection.LEFT;
             }
             
