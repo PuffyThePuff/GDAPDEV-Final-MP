@@ -78,6 +78,8 @@ public class PlayerController : MonoBehaviour
         if (EventSystem.current.IsPointerOverGameObject())
             return;
 
-        playerShip.gun.Fire();
+		playerShip.gun[0].Fire();
+		playerShip.gun[1].Fire();
+		playerShip.gun[2].Fire();
     }
 }

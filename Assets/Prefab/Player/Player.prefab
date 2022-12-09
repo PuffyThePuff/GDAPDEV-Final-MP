@@ -100,6 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8639800957572835018, guid: 89486ec54bfb4a447a07042a99523359, type: 3}
   barrelLocation: {fileID: 1568705733008268820}
+  gunCooldown: 0
+  coolDownTimer: 0
 --- !u!1 &2840319483033233916
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,6 +482,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8639800957572835018, guid: 89486ec54bfb4a447a07042a99523359, type: 3}
   barrelLocation: {fileID: 4521905353527776724}
+  gunCooldown: 0
+  coolDownTimer: 0
 --- !u!1 &7392470297629252928
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +584,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8639800957572835018, guid: 89486ec54bfb4a447a07042a99523359, type: 3}
   barrelLocation: {fileID: 6037503498755644614}
+  gunCooldown: 0
+  coolDownTimer: 0
 --- !u!1 &7748301867381166613
 GameObject:
   m_ObjectHideFlags: 0
