@@ -20,6 +20,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Leaderboard.unity
     guid: 2a817d865c55a9d429ce437d471e337e
+  - enabled: 1
+    path: Assets/Scenes/ShopScene.unity
+    guid: 9ab5585cd7120cc46aa9fec980b1d049
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: f1e0b7a5ac3d7ed479a6dc3eb71e581b
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 63dc25e6984508f46a32f52c0988976a
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: dd7fae49701540643a9c84ab3eb8b602
+  - enabled: 1
+    path: Assets/Scenes/Macabanti's Scenes/Prototype On-rails.unity
+    guid: c7aa46de389700b469aea24e596e8941
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 022b7632c6559fd499c47c3f796208cd, type: 2}
     com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: f45c208fe1aeef44099e45d0cbfc4b6c, type: 2}
