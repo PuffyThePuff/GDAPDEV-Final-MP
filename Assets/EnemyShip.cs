@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyShip : Killable
 {
+    [SerializeField] private bool isBoss;
 	EnemyPool pool;
 
 	private void Awake()
@@ -24,6 +25,11 @@ public class EnemyShip : Killable
 		pool.setUnused(this);
         PlayerDataManager.instance.PlayerCurrency += 1;
         ScoreManager.Singleton.addScore(1);
+
+        if (isBoss)
+        {
+            GameOverManager.Instance.OnGameOver(GameOverState.win);
+        }
 
         gameObject.SetActive(false);
     }

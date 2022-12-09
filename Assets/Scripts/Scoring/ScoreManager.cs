@@ -35,7 +35,7 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         Singleton = this;
-        DontDestroyOnLoad(this);
+        //DontDestroyOnLoad(this);
     }
 
     public void addScore(int valueToAdd)

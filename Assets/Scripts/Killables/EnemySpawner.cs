@@ -7,15 +7,13 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] EnemyPool pool;
     [SerializeField] private Killable[] killablePrefabs;
+    [SerializeField] private Killable boss;
+    [SerializeField] private int requiredToKillForBoss;
 
     [Header("Spawn area")]
     [SerializeField] private Vector2 spawnArea;
     [SerializeField] private bool onlyEdge;
-    //[SerializeField] private bool canSpawnAtNegativeX;
-    //[SerializeField] private bool canSpawnAtPositiveX;
-    //[SerializeField] private bool canSpawnAtnegativeY;
-    //[SerializeField] private bool canSpawnAtPositiveY;
-    //[SerializeField] private bool spawnOffScreen;
+
     [Range(0.0f, 1.0f)][SerializeField] private float minX = 0.0f;
     [Range(0.0f, 1.0f)][SerializeField] private float maxX = 1.0f;
     [Range(0.0f, 1.0f)][SerializeField] private float minY = 1.0f;
@@ -82,6 +80,14 @@ public class EnemySpawner : MonoBehaviour
         //enemy.gameObject.SetActive(true);
         //enemy2.gameObject.SetActive(true);
 #endif
+        if(ScoreManager.Singleton.score >= requiredToKillForBoss)
+        {
+            if (boss.isDead) return;
+
+            boss.gameObject.SetActive(true);
+            return;
+        }
+
         float aspectRatio = camHandler.AspectRatio();
         float x = m_transform.position.x + Random.Range(-spawnArea.x * minX * aspectRatio, spawnArea.x * maxX * aspectRatio);
         float y = m_transform.position.y + Random.Range(-spawnArea.y * minY * aspectRatio , spawnArea.y * maxY * aspectRatio);
@@ -90,7 +96,7 @@ public class EnemySpawner : MonoBehaviour
         if (onlyEdge)
         {
             int indexToEdge = Random.Range(1, 3);
-            Debug.Log($"{indexToEdge} || ({x}, {y})");
+            //Debug.Log($"{indexToEdge} || ({x}, {y})");
             switch (indexToEdge)
             {
                 case 1:

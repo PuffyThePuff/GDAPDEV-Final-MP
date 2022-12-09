@@ -31,16 +31,17 @@ public class Enemy : Killable
     private static readonly int SWIPE_LEFT = Animator.StringToHash("Swipe_LEFT");
     private static readonly int SWIPE_RIGHT = Animator.StringToHash("Swipe_RIGHT");
     
-	private void Start()
+    public override void initialize()
     {
+        base.initialize();
         particles.gameObject.SetActive(false);
         timeLeft = 0.0f;
         player = FindObjectOfType<Player>();
-		pool = FindObjectOfType<EnemyPool>();
-	}
+        pool = FindObjectOfType<EnemyPool>();
+    }
 
-	
-	private void Update()
+
+    private void Update()
 	{
         if (isDead) return;
 

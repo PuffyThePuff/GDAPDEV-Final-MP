@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4564720377231653786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: 6.58, z: -0.023855522}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -107,7 +107,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.19, y: 0.21}
   m_EdgeRadius: 0
 --- !u!50 &4564720377231653764
 Rigidbody2D:
@@ -232,6 +232,9 @@ MonoBehaviour:
   barrelLocation: {fileID: 4564720379244009226}
   gunCooldown: 0
   coolDownTimer: 0
+  rapidFireTimer: 5
+  rapidFireCount: 0
+  rapidFire: 0
 --- !u!1 &4564720377432255719
 GameObject:
   m_ObjectHideFlags: 0

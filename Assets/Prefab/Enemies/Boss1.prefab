@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4564720377231653786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: 6.58, z: -0.023855522}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -49,10 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16074f65546f6b6459a02beeffc996f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHP: 50
-  maxHP: 50
-  hurt: {fileID: 0}
-  healthBar: {fileID: 0}
+  startingHP: 1
+  maxHP: 1
 --- !u!114 &6577635567266408191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +230,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8639800957572835018, guid: f99c2dd0d49700748aebbe4d26289404, type: 3}
   barrelLocation: {fileID: 4564720379244009226}
+  gunCooldown: 0
+  coolDownTimer: 0
+  rapidFireTimer: 5
+  rapidFireCount: 0
+  rapidFire: 0
 --- !u!1 &4564720377432255719
 GameObject:
   m_ObjectHideFlags: 0
