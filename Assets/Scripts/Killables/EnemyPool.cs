@@ -21,17 +21,19 @@ public class EnemyPool : MonoBehaviour
 
 	public void AddEnemyPool(Killable obj)
 	{
-		this.deactiveEnemyList.Add(obj);
+		deactiveEnemyList.Add(obj);
 	}
 
 	public Killable GetEnemyFromPool()
 	{
-			foreach (Killable enemy in deactiveEnemyList)
-			{
-				activeEnemyList.Add(enemy);
-				deactiveEnemyList.Remove(enemy);
-				return enemy;
-			}
+		foreach (Killable enemy in deactiveEnemyList)
+		{
+			Debug.Log("Grabbed enemy from pool");
+			enemy.initialize();
+			activeEnemyList.Add(enemy);
+			deactiveEnemyList.Remove(enemy);
+			return enemy;
+		}
 		int index = Random.Range(0, killablePrefabs.Length);
 		Killable temp = Instantiate(killablePrefabs[index]);
 		activeEnemyList.Add(temp);
@@ -49,18 +51,12 @@ public class EnemyPool : MonoBehaviour
 
 	public void setUnused(Killable killable)
 	{
-		addPoolDelay(killable);
-	}
-
-	IEnumerator addPoolDelay(Killable killable)
-	{
 		activeEnemyList.Remove(killable);
 		Debug.Log("Adding to unused pool");
-		yield return new WaitForSeconds(1);
 		killable.transform.position = new Vector3(9999.0f, 9999.0f, 9999.0f);
 		deactiveEnemyList.Add(killable);
-
 	}
+
 	public void ClearAllEnemyPools()
 	{
 		deactiveEnemyList.Clear();

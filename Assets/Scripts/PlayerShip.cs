@@ -30,7 +30,7 @@ public class PlayerShip : Killable
 
     public override void initialize()
     {
-		setMaxHP(2 + PlayerDataManager.instance.healthUpgradeLevel);
+		startingHP += PlayerDataManager.instance.healthUpgradeLevel;
 
         base.initialize();
 
@@ -41,7 +41,7 @@ public class PlayerShip : Killable
     {
         if (isInvicible) return;
 
-        base.Damage(damage);
+        if(!Config.infiniteHealth) base.Damage(damage);
         healthText.text = currentHP.ToString();
         screenAnimator.Play(_Damage);
 

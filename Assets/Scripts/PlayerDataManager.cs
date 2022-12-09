@@ -11,11 +11,12 @@ public class PlayerDataManager : MonoBehaviour
 	[Header("Upgrade Levels")]
 	public int damageUpgradeLevel = 1;
 	public int fireRateUpgradeLevel = 1;
-	public int healthUpgradeLevel = 1;
+	public int healthUpgradeLevel = 0;
 	public int gunUpgradeLevel = 1;
 	public int power1Stored = 0;
 	public int power2Stored = 0;
 
+	public int level = 1;
 
 
 	private static PlayerDataManager sharedInstance = null;
@@ -50,16 +51,18 @@ public class PlayerDataManager : MonoBehaviour
 
 	public void newGame()
 	{
-		PlayerCurrency = 0;
+		PlayerCurrency = Config.startingMoney;
 
 		damageUpgradeLevel = 1;
 		fireRateUpgradeLevel = 1;
-		healthUpgradeLevel = 1;
+		healthUpgradeLevel = 0;
 		gunUpgradeLevel = 1;
 
 		power1Stored = 0;
 		power2Stored = 0;
-}
+
+		level = 1;
+	}
 
 	public void UpdatePremiumCurrency(int currency)
 	{
