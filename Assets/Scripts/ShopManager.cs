@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
@@ -14,7 +12,7 @@ public class ShopManager : MonoBehaviour
 	[SerializeField] Button BulletDamageUpgradeButton;
 
 	[SerializeField] Button HealthUpgradeButton;
-	[SerializeField] Button Stat4UpgradePrice;
+	[SerializeField] Button gunUpgradeButton;
 
 	[SerializeField] Button Power1UpgradeButton;
 	[SerializeField] Button Power2UpgradeButton;
@@ -24,7 +22,7 @@ public class ShopManager : MonoBehaviour
 	[SerializeField] TMP_Text BulletDamagePriceText;
 
 	[SerializeField] TMP_Text HealthPriceText;
-	[SerializeField] TMP_Text UpgradablePriceText;
+	[SerializeField] TMP_Text gunUpgradePriceText;
 
 	[SerializeField] TMP_Text Power1PriceText;
 	[SerializeField] TMP_Text Power2PriceText;
@@ -34,7 +32,7 @@ public class ShopManager : MonoBehaviour
 	[SerializeField] float BulletDamagePrice;
 
 	[SerializeField] float HealthPrice;
-	[SerializeField] float Stat4Price;
+	[SerializeField] float gunUpgradePrice;
 
 	[SerializeField] float Power1Price;
 	[SerializeField] float Power2Price;
@@ -46,7 +44,7 @@ public class ShopManager : MonoBehaviour
 		FireRatePriceText.text = $"{FireRatePrice} Currency";
 		BulletDamagePriceText.text = $"{BulletDamagePrice} Currency";
 		HealthPriceText.text = $"{HealthPrice} Currency";
-		UpgradablePriceText.text = $"{Stat4Price} Currency";
+		gunUpgradePriceText.text = $"{gunUpgradePrice} Currency";
 		Power1PriceText.text = $"{Power1Price} Currency";
 		Power2PriceText.text = $"{Power2Price} Currency";
 
@@ -80,13 +78,13 @@ public class ShopManager : MonoBehaviour
 				HealthUpgradeButton.interactable = true;
 			}
 
-			if(PlayerDataManager.instance.PlayerCurrency < Stat4Price)
+			if(PlayerDataManager.instance.PlayerCurrency < gunUpgradePrice && PlayerDataManager.instance.gunUpgradeLevel < 3)
 			{
-				Stat4UpgradePrice.interactable = false;
+				gunUpgradeButton.interactable = false;
 			}
 			else
 			{
-				Stat4UpgradePrice.interactable = true;
+				gunUpgradeButton.interactable = true;
 			}
 
 			if(PlayerDataManager.instance.PlayerCurrency < Power1Price)
@@ -113,7 +111,7 @@ public class ShopManager : MonoBehaviour
 			 BulletDamageUpgradeButton.interactable = false;
 
 			 HealthUpgradeButton.interactable = false;
-			 Stat4UpgradePrice.interactable = false;
+			 gunUpgradeButton.interactable = false;
 
 			 Power1UpgradeButton.interactable = false;
 			 Power2UpgradeButton.interactable = false;
@@ -123,35 +121,40 @@ public class ShopManager : MonoBehaviour
 	public void UpgradeFireRate()
 	{
 		PlayerDataManager.instance.PlayerCurrency -= (int)FireRatePrice;
+		PlayerDataManager.instance.fireRateUpgradeLevel++;
 	}
 
 	public void UpgradeDamage()
 	{
 		PlayerDataManager.instance.PlayerCurrency -= (int)BulletDamagePrice;
+		PlayerDataManager.instance.damageUpgradeLevel++;
 
 	}
 
 	public void UpgradeHealth()
 	{
 		PlayerDataManager.instance.PlayerCurrency -= (int)HealthPrice;
+		PlayerDataManager.instance.healthUpgradeLevel++;
 
 	}
 
 	public void UpgradeStat4()
 	{
-		PlayerDataManager.instance.PlayerCurrency -= (int)Stat4Price;
+		PlayerDataManager.instance.PlayerCurrency -= (int)gunUpgradePrice;
+		PlayerDataManager.instance.gunUpgradeLevel++;
 
 	}
 
 	public void BuyPower1()
 	{
 		PlayerDataManager.instance.PlayerCurrency -= (int)Power1Price;
-
+		PlayerDataManager.instance.power1Stored++;
 	}
 
 	public void BuyPower2()
 	{
 		PlayerDataManager.instance.PlayerCurrency -= (int)Power2Price;
+		PlayerDataManager.instance.power2Stored++;
 
 	}
 }

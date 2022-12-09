@@ -30,6 +30,7 @@ public class Gun : MonoBehaviour
         }
         else
         {
+			bul.updateDamage(PlayerDataManager.instance.damageUpgradeLevel);
             switch (currentGunType)
             {
                 case GunType.rock:
