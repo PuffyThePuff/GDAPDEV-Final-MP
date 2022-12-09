@@ -5,7 +5,14 @@ using UnityEngine;
 
 public class EnemyShip : Killable
 {
-    public override void initialize()
+	EnemyPool pool;
+
+	private void Awake()
+	{
+		pool = FindObjectOfType<EnemyPool>();
+	}
+
+	public override void initialize()
     {
         RandomizeType();
     }
@@ -14,6 +21,7 @@ public class EnemyShip : Killable
     {
         base.Die();
         RandomizeType();
+		pool.setUnused(this);
         PlayerDataManager.instance.PlayerCurrency += 1;
         ScoreManager.Singleton.addScore(1);
 

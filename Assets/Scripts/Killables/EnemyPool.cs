@@ -39,6 +39,14 @@ public class EnemyPool : MonoBehaviour
 		return temp;
 	}
 
+	public void killActivePool()
+	{
+		foreach(Killable enemy in activeEnemyList)
+		{
+			setUnused(enemy);
+		}
+	}
+
 	public void setUnused(Killable killable)
 	{
 		addPoolDelay(killable);
