@@ -29,6 +29,7 @@ public class EnemyPool : MonoBehaviour
 		foreach (Killable enemy in deactiveEnemyList)
 		{
 			Debug.Log("Grabbed enemy from pool");
+			enemy.setMaxHP(PlayerDataManager.instance.level);
 			enemy.initialize();
 			activeEnemyList.Add(enemy);
 			deactiveEnemyList.Remove(enemy);

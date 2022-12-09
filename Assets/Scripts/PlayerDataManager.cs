@@ -16,6 +16,7 @@ public class PlayerDataManager : MonoBehaviour
 	public int power1Stored = 0;
 	public int power2Stored = 0;
 
+	public int level = 1;
 
 
 	private static PlayerDataManager sharedInstance = null;
@@ -59,7 +60,9 @@ public class PlayerDataManager : MonoBehaviour
 
 		power1Stored = 0;
 		power2Stored = 0;
-}
+
+		level = 1;
+	}
 
 	public void UpdatePremiumCurrency(int currency)
 	{

@@ -42,6 +42,8 @@ public class EnemySpawner : MonoBehaviour
     {
         m_transform = transform;
         camHandler = CameraHandler.instance;
+		pool = FindObjectOfType<EnemyPool>();
+
 
         InvokeRepeating("Spawn", 0.0f, 2.0f);
     }
