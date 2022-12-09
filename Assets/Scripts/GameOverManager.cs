@@ -58,20 +58,12 @@ public class GameOverManager : MenuClass
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.W))
-        {
-            Debug.Log("Won");
-            OnGameOver(GameOverState.win);
-        }
-        else if(Input.GetKeyUp(KeyCode.L))
-        {
-            Debug.Log("Lose");
-            OnGameOver(GameOverState.lose);
-        }
     }
 
     public void OnGameOver(GameOverState gameOverState)
     {
+        if (currentGameOverState != GameOverState.none) return;
+
         currentGameOverState = gameOverState;
         switch (currentGameOverState)
         {

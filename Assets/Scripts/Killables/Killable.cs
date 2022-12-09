@@ -9,7 +9,7 @@ public class Killable : MonoBehaviour
 	[SerializeField] protected int maxHP;
 
 	protected int currentHP;
-	protected bool isDead;
+	public bool isDead { get; private set; } = false;
 
 	public void Start()
 	{

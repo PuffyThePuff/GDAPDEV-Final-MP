@@ -9,8 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: d19d2a933cf70a645aa115ca7ec74f84
   - enabled: 1
-    path: Assets/Scenes/Macabanti's Scenes/Prototype On-rails.unity
-    guid: c7aa46de389700b469aea24e596e8941
+    path: Assets/Scenes/Level1_NEW.unity
+    guid: 57df91c6f23f49444b3241cf160d4683
+  - enabled: 1
+    path: Assets/Scenes/Level2_NEW.unity
+    guid: 25194a0282e9c45409537a3fb4ff7397
+  - enabled: 1
+    path: Assets/Scenes/Level3_NEW.unity
+    guid: ca13b9fb5b97506409ad19d4262b9846
   - enabled: 1
     path: Assets/Scenes/Leaderboard.unity
     guid: 2a817d865c55a9d429ce437d471e337e
