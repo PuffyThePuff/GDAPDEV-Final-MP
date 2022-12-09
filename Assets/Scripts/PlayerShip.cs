@@ -15,7 +15,7 @@ public class PlayerShip : Killable
     [SerializeField] private Animator screenAnimator;
 
     public PlayerMovement movement { get; private set; }
-    public Gun gun { get; private set; }
+    public Gun[] gun { get; private set; }
     private readonly static int _Damage = Animator.StringToHash("Damage");
 
     //public Collider2D m_Collider2D { get; private set; }
@@ -23,7 +23,7 @@ public class PlayerShip : Killable
     private void Awake()
     {
         movement = GetComponent<PlayerMovement>();
-        gun = GetComponentInChildren<Gun>();
+        gun = GetComponentsInChildren<Gun>();
         waitTime = new WaitForSeconds(invicibilityDuration);
         //m_Collider2D = GetComponent<Collider2D>();
     }
