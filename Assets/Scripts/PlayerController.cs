@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -82,4 +83,28 @@ public class PlayerController : MonoBehaviour
 		playerShip.gun[1].Fire();
 		playerShip.gun[2].Fire();
     }
+<<<<<<< Updated upstream
+=======
+
+	public void OnSpread(object sender, SpreadEventArgs args)
+	{
+		if (PlayerDataManager.instance.power1Stored > 0)
+		{
+			PlayerDataManager.instance.power1Stored--;
+			//Clear Enemies
+			enemypool.killActivePool();
+		}
+	}
+
+	public void OnPinch(object sender, SpreadEventArgs args)
+	{
+		if(PlayerDataManager.instance.power2Stored > 0)
+		{
+			PlayerDataManager.instance.power2Stored--;
+			playerShip.gun[0].rapidFire = true;
+			playerShip.gun[1].rapidFire = true;
+			playerShip.gun[2].rapidFire = true;
+		}
+	}
+>>>>>>> Stashed changes
 }
