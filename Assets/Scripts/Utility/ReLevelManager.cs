@@ -33,8 +33,6 @@ public class ReLevelManager : MonoBehaviour
     private void Awake()
     {
         Singleton = this;
-
-        DontDestroyOnLoad(this.gameObject);
     }
 
     public void OnQuitPressed()
