@@ -51,7 +51,7 @@ public class ShopManager : MonoBehaviour
 		if(PlayerDataManager.instance.PlayerCurrency > 0)
 		{
 
-			if(PlayerDataManager.instance.PlayerCurrency < FireRatePrice)
+			if(PlayerDataManager.instance.PlayerCurrency < FireRatePrice && PlayerDataManager.instance.fireRateUpgradeLevel < 6)
 			{
 				FireRateUpgradeButton.interactable = false;
 			}
