@@ -2870,7 +2870,7 @@ MonoBehaviour:
   pool: {fileID: 1223811771}
   killablePrefabs: []
   boss: {fileID: 2081843033}
-  requiredToKillForBoss: 30
+  requiredToKillForBoss: 1
   spawnArea: {x: 12.1, y: 23.1}
   onlyEdge: 1
   minX: 1
@@ -4131,7 +4131,7 @@ Animator:
   m_GameObject: {fileID: 1614039778}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d65fb081754b3624d8a58ca3e5d1f31f, type: 2}
+  m_Controller: {fileID: 9100000, guid: d5ad35c3e37ca4a409fb4992a90ac16d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
