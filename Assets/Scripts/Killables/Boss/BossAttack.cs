@@ -26,6 +26,6 @@ public class BossAttack : MonoBehaviour
 
     private void SpecialAttack()
     {
-        gun.SpecialFire();
+       // gun.SpecialFire();
     }
 }
