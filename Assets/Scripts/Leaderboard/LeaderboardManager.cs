@@ -8,6 +8,8 @@ public class LeaderboardManager : MonoBehaviour
 {
     [SerializeField] private GameObject prefab;
 
+    [SerializeField] private TMP_InputField nameInput;
+
     private uint counter = 1;
 
     #region singleton code
@@ -40,13 +42,6 @@ public class LeaderboardManager : MonoBehaviour
         Singleton = this;
     }
 
-    private void Start()
-    {
-        WebHandler.Singleton.SendPlayerScore(ScoreManager.Singleton.userName, ScoreManager.Singleton.score);
-        ScoreManager.Singleton.resetData();
-        WebHandler.Singleton.GetPlayerScores();
-    }
-
     public void AddToLeaderboard(string playerData)
     {
         GameObject listObject = Instantiate(prefab, this.gameObject.transform);
@@ -54,5 +49,19 @@ public class LeaderboardManager : MonoBehaviour
         listObject.GetComponent<TMP_Text>().text = counter.ToString() + playerData.Remove(0, 10);
 
         counter++;
+    }
+
+    public void DisplayScores()
+    {
+        if (nameInput.text != "")
+        {
+            string userName = nameInput.text;
+
+            nameInput.GetComponentInParent<Transform>().gameObject.SetActive(false);
+
+            WebHandler.Singleton.SendPlayerScore(userName, ScoreManager.Singleton.score);
+            ScoreManager.Singleton.resetData();
+            WebHandler.Singleton.GetPlayerScores();
+        }
     }
 }
