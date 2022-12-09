@@ -96,4 +96,16 @@ public class PlayerController : MonoBehaviour
 			enemypool.killActivePool();
 		}
 	}
+
+	public void OnPinch(object sender, SpreadEventArgs args)
+	{
+		if(PlayerDataManager.instance.power2Stored > 0)
+		{
+			PlayerDataManager.instance.power2Stored--;
+
+			playerShip.gun[0].rapidFire = true;
+			playerShip.gun[1].rapidFire = true;
+			playerShip.gun[2].rapidFire = true;
+		}
+	}
 }

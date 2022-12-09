@@ -10,7 +10,12 @@ public class Gun : MonoBehaviour
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform barrelLocation;
 	[SerializeField] private float gunCooldown; 
-	[SerializeField] private float coolDownTimer; 
+	[SerializeField] private float coolDownTimer;
+
+	[SerializeField] private float rapidFireTimer = 5.0f;
+	[SerializeField] private float rapidFireCount = 0.0f;
+
+	public bool rapidFire = false;
 
     private bool isHoldingTrigger;
 
@@ -48,11 +53,18 @@ public class Gun : MonoBehaviour
 		{
 				coolDownTimer -= Time.deltaTime;
 		}
+		if (rapidFire) {
+			if (rapidFireCount < rapidFireTimer)
+			{
+				rapidFireCount += Time.deltaTime;
+			}
+			else rapidFire = false;
+		}
 	}
 
 	public virtual void Fire() 
     {
-		if(coolDownTimer <= 0)
+		if(coolDownTimer <= 0 || rapidFire)
 		{
 
         Bullet bul = (Bullet)Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
@@ -87,7 +99,7 @@ public class Gun : MonoBehaviour
                     break;
             }
 
-				coolDownTimer = gunCooldown;
+				if(!rapidFire) coolDownTimer = gunCooldown;
 
 		}
 		}
