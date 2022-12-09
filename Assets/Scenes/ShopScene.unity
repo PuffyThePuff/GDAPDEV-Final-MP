@@ -1164,7 +1164,7 @@ RectTransform:
   m_GameObject: {fileID: 377478379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.57020015, y: 0.57020015, z: 0.57020015}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 266383480}
@@ -1178,7 +1178,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 437}
+  m_AnchoredPosition: {x: -13.323, y: 128}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &377478381
@@ -2339,7 +2339,7 @@ MonoBehaviour:
   FireRateUpgradeButton: {fileID: 1755198223}
   BulletDamageUpgradeButton: {fileID: 266383483}
   HealthUpgradeButton: {fileID: 735162115}
-  UpgradableUpgradeButton: {fileID: 1766362703}
+  Stat4UpgradePrice: {fileID: 0}
   Power1UpgradeButton: {fileID: 559189494}
   Power2UpgradeButton: {fileID: 766763630}
   FireRatePriceText: {fileID: 1606766722}
@@ -2351,7 +2351,7 @@ MonoBehaviour:
   FireRatePrice: 0
   BulletDamagePrice: 0
   HealthPrice: 0
-  UpgradablePrice: 0
+  Stat4Price: 0
   Power1Price: 0
   Power2Price: 0
 --- !u!4 &1170115286
@@ -2688,7 +2688,7 @@ RectTransform:
   m_GameObject: {fileID: 1418289473}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.69064, y: 0.69064, z: 0.69064}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 589183738}
@@ -2697,7 +2697,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 200, y: 120}
+  m_AnchoredPosition: {x: 146, y: 73}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1418289475
@@ -3371,9 +3371,9 @@ RectTransform:
   m_Father: {fileID: 203866430}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 997, y: -100}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -552, y: -100}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1798245541
@@ -3396,7 +3396,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Money : 00'
+  m_text: 'Currency : 00'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3501,7 +3501,7 @@ RectTransform:
   m_GameObject: {fileID: 1802998297}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.77905, y: 0.77905, z: 0.77905}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1016260514}
@@ -3510,7 +3510,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -180, y: 120}
+  m_AnchoredPosition: {x: -120, y: 75}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1802998299
