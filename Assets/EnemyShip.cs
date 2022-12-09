@@ -15,6 +15,7 @@ public class EnemyShip : Killable
 	public override void initialize()
     {
         RandomizeType();
+		startingHP += PlayerDataManager.instance.level - 1;
     }
 
     public override void Die()
@@ -22,7 +23,7 @@ public class EnemyShip : Killable
         base.Die();
         RandomizeType();
 		pool.setUnused(this);
-        PlayerDataManager.instance.PlayerCurrency += 1;
+        PlayerDataManager.instance.PlayerCurrency += 5;
         ScoreManager.Singleton.addScore(1);
 
         gameObject.SetActive(false);

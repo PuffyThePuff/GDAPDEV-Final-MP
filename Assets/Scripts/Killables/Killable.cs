@@ -43,8 +43,4 @@ public class Killable : MonoBehaviour
 		Destroy(gameObject);
 	}
 
-	public void setMaxHP(int hp)
-	{
-		startingHP = hp;
-	}
 }

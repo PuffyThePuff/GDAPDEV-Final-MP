@@ -11,7 +11,7 @@ public class PlayerDataManager : MonoBehaviour
 	[Header("Upgrade Levels")]
 	public int damageUpgradeLevel = 1;
 	public int fireRateUpgradeLevel = 1;
-	public int healthUpgradeLevel = 1;
+	public int healthUpgradeLevel = 0;
 	public int gunUpgradeLevel = 1;
 	public int power1Stored = 0;
 	public int power2Stored = 0;
@@ -55,7 +55,7 @@ public class PlayerDataManager : MonoBehaviour
 
 		damageUpgradeLevel = 1;
 		fireRateUpgradeLevel = 1;
-		healthUpgradeLevel = 1;
+		healthUpgradeLevel = 0;
 		gunUpgradeLevel = 1;
 
 		power1Stored = 0;

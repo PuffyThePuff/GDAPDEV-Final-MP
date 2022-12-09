@@ -30,7 +30,7 @@ public class PlayerShip : Killable
 
     public override void initialize()
     {
-		setMaxHP(2 + PlayerDataManager.instance.healthUpgradeLevel);
+		startingHP += PlayerDataManager.instance.healthUpgradeLevel;
 
         base.initialize();
 
