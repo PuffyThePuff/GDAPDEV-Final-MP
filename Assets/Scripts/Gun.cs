@@ -9,6 +9,8 @@ public class Gun : MonoBehaviour
 
     [SerializeField] private Bullet bulletPrefab;
     [SerializeField] private Transform barrelLocation;
+	[SerializeField] private float gunCooldown; 
+	[SerializeField] private float coolDownTimer; 
 
     private bool isHoldingTrigger;
 
@@ -16,11 +18,43 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
-        
+		switch (PlayerDataManager.instance.fireRateUpgradeLevel)
+		{
+
+			case 1: gunCooldown = 1.0f;
+				break;
+
+			case 2: gunCooldown = 0.7f;
+				break;
+
+			case 3: gunCooldown = 0.5f;
+				break;
+
+			case 4: gunCooldown = 0.3f;
+				break;
+
+			case 5: gunCooldown = 0.2f;
+				break;
+
+			case 6: gunCooldown = 0.0f;
+				break;
+
+		}
     }
 
-    public virtual void Fire() 
+	private void Update()
+	{
+		if(coolDownTimer > 0)
+		{
+				coolDownTimer -= Time.deltaTime;
+		}
+	}
+
+	public virtual void Fire() 
     {
+		if(coolDownTimer <= 0)
+		{
+
         Bullet bul = (Bullet)Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation);
 
         //check if attached to player to not add bullet type
@@ -30,6 +64,7 @@ public class Gun : MonoBehaviour
         }
         else
         {
+			bul.updateDamage(PlayerDataManager.instance.damageUpgradeLevel);
             switch (currentGunType)
             {
                 case GunType.rock:
@@ -51,13 +86,17 @@ public class Gun : MonoBehaviour
                     this.gameObject.GetComponentInParent<SpriteRenderer>().color = Color.red;
                     break;
             }
-        }
 
-        //Instantiate bullet (use Pooling)
-        //Bullet will move itself
-    }
+				coolDownTimer = gunCooldown;
 
-    public void changeGun(SwipeDirection direction)
+		}
+		}
+
+		//Instantiate bullet (use Pooling)
+		//Bullet will move itself
+	}
+
+	public void changeGun(SwipeDirection direction)
     {
         if (direction == SwipeDirection.LEFT)
         {

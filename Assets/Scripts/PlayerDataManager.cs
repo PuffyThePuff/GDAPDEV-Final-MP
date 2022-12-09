@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class PlayerDataManager : MonoBehaviour
 {
+	[Header("Player Currency")]
 	[SerializeField] protected int PremiumCurrency;
 	public int PlayerCurrency;
+
+	[Header("Upgrade Levels")]
+	public int damageUpgradeLevel = 1;
+	public int fireRateUpgradeLevel = 1;
+	public int healthUpgradeLevel = 1;
+	public int gunUpgradeLevel = 1;
+	public int power1Stored = 0;
+	public int power2Stored = 0;
+
+
 
 	private static PlayerDataManager sharedInstance = null;
 	public static PlayerDataManager instance
@@ -40,7 +51,15 @@ public class PlayerDataManager : MonoBehaviour
 	public void newGame()
 	{
 		PlayerCurrency = 0;
-	}
+
+		damageUpgradeLevel = 1;
+		fireRateUpgradeLevel = 1;
+		healthUpgradeLevel = 1;
+		gunUpgradeLevel = 1;
+
+		power1Stored = 0;
+		power2Stored = 0;
+}
 
 	public void UpdatePremiumCurrency(int currency)
 	{

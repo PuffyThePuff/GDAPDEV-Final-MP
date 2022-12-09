@@ -30,7 +30,10 @@ public class PlayerShip : Killable
 
     public override void initialize()
     {
+		setMaxHP(2 + PlayerDataManager.instance.healthUpgradeLevel);
+
         base.initialize();
+
         healthText.SetText($"HP: {currentHP}");
     }
 
