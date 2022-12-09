@@ -41,7 +41,7 @@ public class PlayerShip : Killable
     {
         if (isInvicible) return;
 
-        base.Damage(damage);
+        if(!Config.infiniteHealth) base.Damage(damage);
         healthText.text = currentHP.ToString();
         screenAnimator.Play(_Damage);
 
