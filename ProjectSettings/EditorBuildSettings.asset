@@ -11,5 +11,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Macabanti's Scenes/Prototype On-rails.unity
     guid: c7aa46de389700b469aea24e596e8941
+  - enabled: 1
+    path: Assets/Scenes/Leaderboard.unity
+    guid: 2a817d865c55a9d429ce437d471e337e
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: a397dac9b859fa94c83f50ab86fea7e5, type: 2}

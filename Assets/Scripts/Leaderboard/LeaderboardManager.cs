@@ -51,7 +51,7 @@ public class LeaderboardManager : MonoBehaviour
     {
         GameObject listObject = Instantiate(prefab, this.gameObject.transform);
 
-        listObject.GetComponent<TMP_Text>().text = counter.ToString() + playerData;
+        listObject.GetComponent<TMP_Text>().text = counter.ToString() + playerData.Remove(0, 10);
 
         counter++;
     }
