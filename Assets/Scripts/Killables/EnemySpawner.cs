@@ -159,7 +159,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.red;
         float aspect = Camera.main.aspect;
         Gizmos.DrawWireCube(transform.position, spawnArea * aspect);
     }

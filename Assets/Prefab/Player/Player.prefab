@@ -202,7 +202,7 @@ Transform:
   m_Children:
   - {fileID: 4521905355283862101}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4521905354212637312
 MonoBehaviour:
@@ -216,9 +216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57628406437369d408093d8901906204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHP: 0
-  maxHP: 0
-  invicibilityDuration: 0
+  startingHP: 5
+  maxHP: 5
+  invicibilityDuration: 1
   healthText: {fileID: 0}
   screenAnimator: {fileID: 0}
 --- !u!114 &4521905354212637327
