@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Config : MonoBehaviour
 {
@@ -66,5 +67,10 @@ public class Config : MonoBehaviour
     public void OnNotificationIntervalChanged(InputField field)
     {
         notificationIntervalTime = int.Parse(field.text);
+    }
+
+    public void CheatMoney(TMP_InputField money)
+    {
+        startingMoney = int.Parse(money.text);
     }
 }

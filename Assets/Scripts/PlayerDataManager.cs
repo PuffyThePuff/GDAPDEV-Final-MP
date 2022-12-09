@@ -50,7 +50,7 @@ public class PlayerDataManager : MonoBehaviour
 
 	public void newGame()
 	{
-		PlayerCurrency = 0;
+		PlayerCurrency = Config.startingMoney;
 
 		damageUpgradeLevel = 1;
 		fireRateUpgradeLevel = 1;
