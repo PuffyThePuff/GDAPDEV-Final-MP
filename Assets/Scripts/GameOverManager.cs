@@ -110,4 +110,15 @@ public class GameOverManager : MenuClass
     {
         LoadScene(nextLevelIndex);
     }
+
+    public void WatchAd()
+    {
+        RewardedAdSample.Singleton.ShowAd();
+    }
+
+    public void RevivePlayer()
+    {
+        Debug.Log("reviving");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

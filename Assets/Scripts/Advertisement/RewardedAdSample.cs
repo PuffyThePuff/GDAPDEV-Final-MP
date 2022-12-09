@@ -6,18 +6,40 @@ using UnityEngine.UI;
 
 public class RewardedAdSample : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-    [SerializeField] private Button _showAdButton;
-    [SerializeField] private Button _hideAdButton;
-
-    [SerializeField] private string _androidAdUnitID = "Interstitial_Android";
-    [SerializeField] private string _iOSAdUnitID = "Interstitial_iOS";
+    [SerializeField] private string _androidAdUnitID = "Rewarded_Android";
+    [SerializeField] private string _iOSAdUnitID = "Rewarded_iOS";
     private string _adUnitID;
+
+    #region singleton code
+    //Miguel's really cool singleton code he made in 2020 and probably still works
+    //put Singleton = this in Awake()
+    private static RewardedAdSample _singleton;
+
+    //getter and setter for singleton
+    public static RewardedAdSample Singleton
+    {
+        get => _singleton;
+
+        private set
+        {
+            if (_singleton == null)
+            {
+                _singleton = value;
+            }
+            else if (_singleton != value)
+            {
+                Debug.Log($"{nameof(RewardedAdSample)} instance already exists, destroying duplicate");
+                Destroy(value);
+            }
+        }
+    }
+    #endregion
 
     private void Awake()
     {
-        _adUnitID = (Application.platform == RuntimePlatform.IPhonePlayer) ? _iOSAdUnitID : _androidAdUnitID;
+        Singleton = this;
 
-        _showAdButton.interactable = false;
+        _adUnitID = (Application.platform == RuntimePlatform.IPhonePlayer) ? _iOSAdUnitID : _androidAdUnitID;
     }
 
     private void Start()
@@ -41,14 +63,12 @@ public class RewardedAdSample : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsS
     public void ShowAd()
     {
         Debug.Log("Showing ad: " + _adUnitID);
-        _showAdButton.interactable = false;
         Advertisement.Show(_adUnitID, this);
     }
 
     public void OnUnityAdsAdLoaded(string placementId)
     {
         Debug.Log($"{placementId} has been loaded");
-        _showAdButton.interactable = true;
     }
 
     public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
@@ -65,10 +85,12 @@ public class RewardedAdSample : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsS
     {
         Debug.Log("Unity ads show complete");
 
-        if (placementId.Equals(_adUnitID) && showCompletionState.Equals(UnityAdsCompletionState.COMPLETED))
+        if (placementId.Equals(_adUnitID))
         {
             // ADD REWARD HERE
             Debug.Log("Ad watch completed");
+
+            GameOverManager.Instance.RevivePlayer();
         }
 
         // load another for next time
@@ -82,6 +104,6 @@ public class RewardedAdSample : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsS
 
     public void OnUnityAdsShowStart(string placementId)
     {
-        throw new System.NotImplementedException();
+        
     }
 }

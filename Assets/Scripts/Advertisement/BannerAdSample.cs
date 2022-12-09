@@ -6,9 +6,6 @@ using UnityEngine.Advertisements;
 
 public class BannerAdSample : MonoBehaviour
 {
-    [SerializeField] private Button _showBannerButton;
-    [SerializeField] private Button _hideBannerButton;
-    
     [SerializeField] private string _androidAdUnitID = "Banner_Android";
     [SerializeField] private string _iOSAdUnitID = "Banner_iOS";
     private string _adUnitID;
@@ -60,7 +57,6 @@ public class BannerAdSample : MonoBehaviour
     private void OnBannerLoaded()
     {
         Debug.Log("Banner Loaded");
-        _showBannerButton.interactable = true;
     }
 
     private void OnBannerError(string message)
@@ -83,14 +79,12 @@ public class BannerAdSample : MonoBehaviour
     
     private void OnBannerShow()
     {
-        _showBannerButton.interactable = false;
-        _hideBannerButton.interactable = true;
+
     }
 
     private void OnBannerHidden()
     {
-        _showBannerButton.interactable = true;
-        _hideBannerButton.interactable = false;
+
     }
 
     public void HideBannerAd()

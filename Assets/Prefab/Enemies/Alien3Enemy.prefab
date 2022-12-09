@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4564720377231653764}
   m_Layer: 7
   m_Name: Alien3Enemy
-  m_TagString: paper
+  m_TagString: rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,7 +51,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHP: 0
   maxHP: 0
-  hurt: {fileID: 8300000, guid: 01fe8e10a633e964b8ec578866963a1e, type: 3}
 --- !u!114 &4564720377231653785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +230,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8639800957572835018, guid: f99c2dd0d49700748aebbe4d26289404, type: 3}
   barrelLocation: {fileID: 4564720379244009226}
+  gunCooldown: 0
+  coolDownTimer: 0
 --- !u!1 &4564720377432255719
 GameObject:
   m_ObjectHideFlags: 0
