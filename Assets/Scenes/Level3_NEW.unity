@@ -1431,7 +1431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378514079}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -9}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2870,7 +2870,7 @@ MonoBehaviour:
   pool: {fileID: 1223811771}
   killablePrefabs: []
   boss: {fileID: 2081843033}
-  requiredToKillForBoss: 1
+  requiredToKillForBoss: 30
   spawnArea: {x: 12.1, y: 23.1}
   onlyEdge: 1
   minX: 1
