@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build.Player;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,7 +19,9 @@ public class PlayerController : MonoBehaviour
     private Transform m_transform;
 
     PlayerShip playerShip;
-    //Joystick joystick;
+	//Joystick joystick;
+
+	EnemyPool enemypool;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +33,9 @@ public class PlayerController : MonoBehaviour
 
         playerShip = GetComponent<PlayerShip>();
         GestureManager.Instance.OnTap += OnTap;
-        //joystick = FindObjectOfType<Joystick>();
+		//joystick = FindObjectOfType<Joystick>();
+
+		enemypool = FindObjectOfType<EnemyPool>();
     }
 
     private void OnDisable()
@@ -80,11 +83,9 @@ public class PlayerController : MonoBehaviour
             return;
 
 		playerShip.gun[0].Fire();
-		playerShip.gun[1].Fire();
-		playerShip.gun[2].Fire();
+		if(PlayerDataManager.instance.gunUpgradeLevel == 2)playerShip.gun[1].Fire();
+		if(PlayerDataManager.instance.gunUpgradeLevel == 3)playerShip.gun[2].Fire();
     }
-<<<<<<< Updated upstream
-=======
 
 	public void OnSpread(object sender, SpreadEventArgs args)
 	{
@@ -95,16 +96,4 @@ public class PlayerController : MonoBehaviour
 			enemypool.killActivePool();
 		}
 	}
-
-	public void OnPinch(object sender, SpreadEventArgs args)
-	{
-		if(PlayerDataManager.instance.power2Stored > 0)
-		{
-			PlayerDataManager.instance.power2Stored--;
-			playerShip.gun[0].rapidFire = true;
-			playerShip.gun[1].rapidFire = true;
-			playerShip.gun[2].rapidFire = true;
-		}
-	}
->>>>>>> Stashed changes
 }

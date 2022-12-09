@@ -678,12 +678,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.75
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -905,7 +905,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Upgrade [stat]
+  m_text: Upgrade Gun
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1061,7 +1061,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Buy Power1
+  m_text: Buy Bomb
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2339,21 +2339,21 @@ MonoBehaviour:
   FireRateUpgradeButton: {fileID: 1755198223}
   BulletDamageUpgradeButton: {fileID: 266383483}
   HealthUpgradeButton: {fileID: 735162115}
-  Stat4UpgradePrice: {fileID: 0}
+  gunUpgradeButton: {fileID: 0}
   Power1UpgradeButton: {fileID: 559189494}
   Power2UpgradeButton: {fileID: 766763630}
   FireRatePriceText: {fileID: 1606766722}
   BulletDamagePriceText: {fileID: 2060758783}
   HealthPriceText: {fileID: 1250933881}
-  UpgradablePriceText: {fileID: 64769151}
+  gunUpgradePriceText: {fileID: 0}
   Power1PriceText: {fileID: 601437427}
   Power2PriceText: {fileID: 1909457855}
-  FireRatePrice: 0
-  BulletDamagePrice: 0
-  HealthPrice: 0
-  Stat4Price: 0
-  Power1Price: 0
-  Power2Price: 0
+  FireRatePrice: 75
+  BulletDamagePrice: 75
+  HealthPrice: 75
+  gunUpgradePrice: 100
+  Power1Price: 100
+  Power2Price: 100
 --- !u!4 &1170115286
 Transform:
   m_ObjectHideFlags: 0
@@ -3216,7 +3216,7 @@ GameObject:
   - component: {fileID: 1766362701}
   - component: {fileID: 1766362703}
   m_Layer: 5
-  m_Name: StatUpgradeBtn
+  m_Name: GunUpgradeBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
